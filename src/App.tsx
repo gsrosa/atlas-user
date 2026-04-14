@@ -13,8 +13,11 @@ type View =
   | { type: 'list' }
   | { type: 'account' };
 
+const ACCOUNT_SUBPATHS = /^\/trips\/(account|profile|settings|preferences|password|payments)/;
+
 function resolveView(): View {
   const path = window.location.pathname;
+  if (ACCOUNT_SUBPATHS.test(path)) return { type: 'account' };
   const idMatch = /^\/trips\/([\w-]+)$/.exec(path);
   if (idMatch?.[1]) return { type: 'detail', tripId: idMatch[1] };
   if (/^\/trips\/?$/.test(path)) return { type: 'list' };

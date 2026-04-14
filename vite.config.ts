@@ -13,6 +13,7 @@ export default defineConfig({
       filename: 'remoteEntry.js',
       exposes: {
         './App': './src/bootstrap.tsx',
+        './Skeleton': './src/skeleton.tsx',
       },
       shared: {
         '@gsrosa/atlas-ui': { singleton: true, requiredVersion: false as const },
@@ -45,3 +46,4 @@ export default defineConfig({
     minify: false,
   },
 });
+

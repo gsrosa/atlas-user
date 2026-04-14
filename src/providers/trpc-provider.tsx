@@ -7,10 +7,21 @@ import superjson from 'superjson';
 import { getApiUrl } from '@/lib/env';
 import { trpc } from '@/lib/trpc';
 
+// Module-level singleton — survives App remounts caused by MFE host re-rendering.
+const queryClient = new QueryClient({
+  defaultOptions: {
+    queries: {
+      staleTime: 5 * 60 * 1000, // 5 min — use cache, no refetch within window
+      gcTime: 10 * 60 * 1000,   // 10 min — keep unused entries in memory
+      refetchOnWindowFocus: false,
+      retry: 1,
+    },
+  },
+});
+
 type TrpcProviderProps = { children: ReactNode };
 
 export function TrpcProvider({ children }: TrpcProviderProps) {
-  const [queryClient] = useState(() => new QueryClient());
   const [trpcClient] = useState(() =>
     trpc.createClient({
       links: [
