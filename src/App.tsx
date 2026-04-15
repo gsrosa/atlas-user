@@ -1,11 +1,11 @@
 import { Toaster } from 'sonner';
 
-import { TravelerOnboardingPage } from './features/traveler-profile/traveler-onboarding-page';
-import { AccountLayout } from './features/users/account-layout';
-import { TripDetailPage } from './features/users/components/trip-detail-page';
-import { TripsListPage } from './features/users/components/trips-list-page';
-import './features/users/styles/account.css';
-import { TrpcProvider } from './providers/trpc-provider';
+import { TravelerOnboardingPage } from '@/features/traveler-profile/traveler-onboarding-page';
+import { AccountLayout } from '@/features/users/account-layout';
+import { TripDetailPage } from '@/features/users/components/trip-detail-page';
+import { TripsListPage } from '@/features/users/components/trips-list-page';
+import '@/features/users/styles/account.css';
+import { TrpcProvider } from '@/providers/trpc-provider';
 
 // ─── MFE root — exposed to the shell via Module Federation ────────────────────
 

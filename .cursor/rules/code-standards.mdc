@@ -1,0 +1,21 @@
+---
+alwaysApply: true
+---
+# Code Standards (atlas-user)
+
+Aligned with `atlas-shell` conventions.
+
+## React
+- Import `import React from 'react'` and use `React.useState`, `React.useEffect`, `React.StrictMode`, etc. Do **not** destructure hooks from `react`.
+
+## Imports
+- Use `@/` for everything under `src/` (e.g. `@/features/users/...`, `@/lib/...`).
+
+## Files
+- Kebab-case file and folder names.
+
+## Icons
+- From `lucide-react`, use the `*Icon` names (e.g. `UserIcon`, `MenuIcon`).
+
+## UI
+- Prefer `cn()` from `@gsrosa/atlas-ui` for conditional `className` merging.

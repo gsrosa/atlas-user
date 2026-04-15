@@ -9,15 +9,15 @@ import {
   SparklesIcon,
   XIcon,
 } from 'lucide-react';
-import { useState } from 'react';
+import React from 'react';
 import { useFieldArray, useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 import { z } from 'zod';
 
 import { trpc } from '@/lib/trpc';
 
-import { applyPlanModification, type ItineraryDoc } from '../services/gemini-edit';
-import { AccountShell } from './account-shell';
+import { applyPlanModification, type ItineraryDoc } from '@/features/users/services/plan-edit';
+import { AccountShell } from '@/features/users/components/account-shell';
 
 // ─── Schemas ──────────────────────────────────────────────────────────────────
 
@@ -173,7 +173,7 @@ function EditPanel({
   onItineraryChange,
   onClose,
 }: EditPanelProps) {
-  const [isAdapting, setIsAdapting] = useState(false);
+  const [isAdapting, setIsAdapting] = React.useState(false);
 
   const utils = trpc.useUtils();
 
@@ -555,8 +555,8 @@ function PlanView({ itinerary, flightNumbers, daysCount, departureAt, arrivalAt 
 export function TripDetailPage({ tripId }: { tripId: string }) {
   const { data, isLoading, error } = trpc.plans.getById.useQuery({ id: tripId });
   const plan = data?.plan;
-  const [isEditOpen, setIsEditOpen] = useState(false);
-  const [localItinerary, setLocalItinerary] = useState<ItineraryDoc | null>(null);
+  const [isEditOpen, setIsEditOpen] = React.useState(false);
+  const [localItinerary, setLocalItinerary] = React.useState<ItineraryDoc | null>(null);
 
   if (isLoading) {
     return (

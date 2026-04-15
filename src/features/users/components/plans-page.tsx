@@ -3,7 +3,7 @@ import { Button } from '@gsrosa/atlas-ui';
 
 import { trpc } from '@/lib/trpc';
 
-import { AccountSectionHeader } from './account-section-header';
+import { AccountSectionHeader } from '@/features/users/components/account-section-header';
 
 function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return '—';

@@ -3,7 +3,7 @@ import { ChevronRightIcon, MapPinIcon, PlusIcon } from 'lucide-react';
 
 import { trpc } from '@/lib/trpc';
 
-import { AccountShell } from './account-shell';
+import { AccountShell } from '@/features/users/components/account-shell';
 
 function formatDate(dateStr: string | null | undefined): string {
   if (!dateStr) return '';

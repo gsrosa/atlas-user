@@ -11,9 +11,9 @@ import {
 import { UserIcon } from 'lucide-react';
 import { Controller } from 'react-hook-form';
 
-import { AccountSectionHeader } from './account-section-header';
-import { useProfileForm } from '../hooks/use-profile-form';
-import { FormField } from './form-field';
+import { AccountSectionHeader } from '@/features/users/components/account-section-header';
+import { FormField } from '@/features/users/components/form-field';
+import { useProfileForm } from '@/features/users/hooks/use-profile-form';
 
 const GENDER_OPTIONS = [
   { value: 'male', label: 'Male' },

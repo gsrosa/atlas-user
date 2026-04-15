@@ -1,11 +1,10 @@
 import { zodResolver } from '@hookform/resolvers/zod';
-import { useEffect } from 'react';
+import React from 'react';
 import { useForm } from 'react-hook-form';
 import { toast } from 'sonner';
 
 import { trpc } from '@/lib/trpc';
-
-import { profileSchema, type ProfileFormValues } from '../shared/form-validation';
+import { profileSchema, type ProfileFormValues } from '@/features/users/shared/form-validation';
 
 export function useProfileForm() {
   const utils = trpc.useUtils();
@@ -26,7 +25,7 @@ export function useProfileForm() {
     },
   });
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!profile) return;
     form.reset({
       first_name: profile.first_name ?? '',

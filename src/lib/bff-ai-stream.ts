@@ -1,4 +1,4 @@
-import { getApiUrl } from './env';
+import { getApiUrl } from '@/lib/env';
 
 interface BffAiStreamOptions {
   systemPrompt?: string;

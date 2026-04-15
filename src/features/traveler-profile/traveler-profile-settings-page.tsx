@@ -1,10 +1,10 @@
-import { PencilIcon } from "lucide-react";
+import { PencilIcon } from 'lucide-react';
 import { Button, cn } from "@gsrosa/atlas-ui";
 
 import { trpc } from "@/lib/trpc";
 
-import { TIER1_STEPS } from "./tier1-data";
-import type { Tier1Step } from "./tier1-data";
+import { TIER1_STEPS } from '@/features/traveler-profile/tier1-data';
+import type { Tier1Step } from '@/features/traveler-profile/tier1-data';
 
 // ─── Shared types ─────────────────────────────────────────────────────────────
 

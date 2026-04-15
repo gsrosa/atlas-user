@@ -4,7 +4,7 @@ import { toast } from 'sonner';
 
 import { trpc } from '@/lib/trpc';
 
-import { changePasswordSchema, type ChangePasswordValues } from '../shared/form-validation';
+import { changePasswordSchema, type ChangePasswordValues } from '@/features/users/shared/form-validation';
 
 export function usePasswordForm() {
   const form = useForm<ChangePasswordValues>({

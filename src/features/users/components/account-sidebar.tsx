@@ -1,6 +1,6 @@
 import { CreditCardIcon, LockIcon, MenuIcon, SlidersHorizontalIcon, UserIcon } from 'lucide-react';
 
-import type { AccountSectionId } from '../account-section';
+import type { AccountSectionId } from '@/features/users/account-section';
 
 const items: { id: AccountSectionId; title: string; icon: typeof UserIcon }[] = [
   { id: 'profile', title: 'Profile', icon: UserIcon },

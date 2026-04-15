@@ -1,9 +1,9 @@
 import { Button, Input } from '@gsrosa/atlas-ui';
 import { LockIcon } from 'lucide-react';
 
-import { AccountSectionHeader } from './account-section-header';
-import { usePasswordForm } from '../hooks/use-password-form';
-import { FormField } from './form-field';
+import { AccountSectionHeader } from '@/features/users/components/account-section-header';
+import { FormField } from '@/features/users/components/form-field';
+import { usePasswordForm } from '@/features/users/hooks/use-password-form';
 
 export function PasswordPage() {
   const { form, isSubmitting, onSubmit } = usePasswordForm();

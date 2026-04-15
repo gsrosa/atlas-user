@@ -1,1 +1,1 @@
-export { AccountLayout } from './account-layout';
+export { AccountLayout } from '@/features/users/account-layout';

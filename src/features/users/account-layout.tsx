@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { ACCOUNT_SECTION_LABELS, type AccountSectionId } from './account-section';
-import { AccountMobileBar, AccountSidebar } from './components/account-sidebar';
-import { AccountShell } from './components/account-shell';
-import { PasswordPage } from './components/password-page';
-import { PaymentsPage } from './components/payments-page';
-import { PreferencesPage } from './components/preferences-page';
-import { ProfilePage } from './components/profile-page';
+import { ACCOUNT_SECTION_LABELS, type AccountSectionId } from '@/features/users/account-section';
+import { AccountMobileBar, AccountSidebar } from '@/features/users/components/account-sidebar';
+import { AccountShell } from '@/features/users/components/account-shell';
+import { PasswordPage } from '@/features/users/components/password-page';
+import { PaymentsPage } from '@/features/users/components/payments-page';
+import { PreferencesPage } from '@/features/users/components/preferences-page';
+import { ProfilePage } from '@/features/users/components/profile-page';
 
 function AccountSectionContent({ section }: { section: AccountSectionId }) {
   switch (section) {

@@ -1,17 +1,16 @@
-import { useEffect, useState } from 'react';
-
-import { CheckIcon, ChevronRightIcon, CompassIcon } from 'lucide-react';
 import { Button, cn } from '@gsrosa/atlas-ui';
+import { CheckIcon, ChevronRightIcon, CompassIcon } from 'lucide-react';
+import React from 'react';
 import { TRPCClientError } from '@trpc/client';
 import { toast } from 'sonner';
 
 import type { RouterInputs } from 'atlas-bff/trpc';
 import { trpc } from '@/lib/trpc';
 
-import { TIER1_SECTIONS, TIER1_STEPS } from './tier1-data';
-import type { Tier1Step } from './tier1-data';
-import { clearDraft, loadDraft, saveDraft } from './onboarding/draft-storage';
-import type { OnboardingDraft } from './onboarding/draft-storage';
+import { clearDraft, loadDraft, saveDraft } from '@/features/traveler-profile/onboarding/draft-storage';
+import type { OnboardingDraft } from '@/features/traveler-profile/onboarding/draft-storage';
+import { TIER1_SECTIONS, TIER1_STEPS } from '@/features/traveler-profile/tier1-data';
+import type { Tier1Step } from '@/features/traveler-profile/tier1-data';
 
 type PatchInput = RouterInputs["travelerProfile"]["patch"];
 
@@ -232,10 +231,10 @@ export const TravelerOnboardingPage = () => {
     },
   });
 
-  const [draft, setDraft] = useState<OnboardingDraft>(loadDraft);
-  const [sectionIdx, setSectionIdx] = useState(0);
-  const [direction, setDirection] = useState<'forward' | 'back'>('forward');
-  const [done, setDone] = useState(false);
+  const [draft, setDraft] = React.useState<OnboardingDraft>(loadDraft);
+  const [sectionIdx, setSectionIdx] = React.useState(0);
+  const [direction, setDirection] = React.useState<'forward' | 'back'>('forward');
+  const [done, setDone] = React.useState(false);
 
   const isEditing = Boolean(data?.tier1Complete);
   const total = GROUPED.length;
@@ -244,13 +243,13 @@ export const TravelerOnboardingPage = () => {
   const isLast = sectionIdx === total - 1;
   const progressPct = ((sectionIdx + 1) / total) * 100;
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (!data?.preferences) return;
     const stored = loadDraft();
     setDraft({ ...data.preferences, ...stored });
   }, [data?.preferences]);
 
-  useEffect(() => {
+  React.useEffect(() => {
     if (data?.tier1Complete && Object.keys(loadDraft()).length === 0) {
       clearDraft();
     }
