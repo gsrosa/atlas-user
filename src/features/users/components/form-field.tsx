@@ -18,7 +18,7 @@ export function FormField({ label, htmlFor, error, hint, children, className }: 
       </Label>
       {children}
       {hint && !error ? (
-        <p className="text-xs text-(--atlas-surface-muted-foreground)">{hint}</p>
+        <p className="text-xs text-neutral-400">{hint}</p>
       ) : null}
       {error ? <p className="text-xs text-red-400">{error}</p> : null}
     </div>

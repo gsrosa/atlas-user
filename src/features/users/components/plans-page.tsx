@@ -27,7 +27,7 @@ export function PlansPage() {
   }
 
   return (
-    <div className="account-fade-in-up space-y-10">
+    <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={MapIcon}
         title="My plans"
@@ -50,7 +50,7 @@ export function PlansPage() {
           {Array.from({ length: 3 }).map((_, i) => (
             <li
               key={i}
-              className="h-20 animate-pulse rounded-xl bg-[var(--atlas-surface-container)]"
+              className="h-20 animate-pulse rounded-xl bg-neutral-700"
             />
           ))}
         </ul>
@@ -63,17 +63,17 @@ export function PlansPage() {
       {!isLoading && !error && plans?.length === 0 && (
         <div className="flex flex-col items-center gap-3 py-12 text-center">
           <MapPinIcon
-            className="size-10 text-[var(--atlas-surface-muted-foreground)] opacity-40"
+            className="size-10 text-neutral-400 opacity-40"
             strokeWidth={1.25}
             aria-hidden
           />
-          <p className="text-sm text-[var(--atlas-surface-muted-foreground)]">
+          <p className="text-sm text-neutral-400">
             No plans yet. Generate your first trip!
           </p>
           <button
             type="button"
             onClick={handleNewPlan}
-            className="text-sm font-medium text-[var(--atlas-color-primary-400)] hover:underline"
+            className="text-sm font-medium text-primary-400 hover:underline"
           >
             Plan a trip →
           </button>
@@ -91,31 +91,31 @@ export function PlansPage() {
               <li key={plan.id}>
                 <button
                   type="button"
-                  className="group flex w-full items-center justify-between gap-4 rounded-xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] p-5 text-left transition-colors hover:bg-[var(--atlas-surface-container-high)]"
+                  className="group flex w-full items-center justify-between gap-4 rounded-xl border border-surface-border bg-surface p-5 text-left transition-colors hover:bg-neutral-600"
                   onClick={() => handleOpenPlan(plan.id)}
                 >
                   <div className="flex min-w-0 items-center gap-4">
-                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,var(--atlas-color-primary-300),var(--atlas-color-primary-500))] text-[var(--atlas-color-neutral-700)] shadow-[var(--atlas-shadow-sm)]">
+                    <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary-300 to-primary-500 text-neutral-700 shadow-[var(--atlas-shadow-sm)]">
                       <MapPinIcon className="size-5" strokeWidth={1.75} aria-hidden />
                     </div>
                     <div className="min-w-0">
-                      <p className="truncate font-medium text-[var(--atlas-surface-foreground)]">
+                      <p className="truncate font-medium text-neutral-100">
                         {displayName}
                       </p>
                       <div className="mt-1 flex flex-wrap items-center gap-x-3 gap-y-1">
                         {subtitle && (
-                          <span className="truncate text-xs text-[var(--atlas-surface-muted-foreground)]">
+                          <span className="truncate text-xs text-neutral-400">
                             {subtitle}
                           </span>
                         )}
                         {plan.departure_at && (
-                          <span className="flex items-center gap-1 text-xs text-[var(--atlas-surface-muted-foreground)]">
+                          <span className="flex items-center gap-1 text-xs text-neutral-400">
                             <CalendarIcon className="size-3 shrink-0" aria-hidden />
                             {formatDate(plan.departure_at)}
                           </span>
                         )}
                         {plan.days_count && (
-                          <span className="text-xs text-[var(--atlas-surface-muted-foreground)]">
+                          <span className="text-xs text-neutral-400">
                             {plan.days_count} days
                           </span>
                         )}
@@ -123,7 +123,7 @@ export function PlansPage() {
                     </div>
                   </div>
                   <ChevronRightIcon
-                    className="size-4 shrink-0 text-[var(--atlas-surface-muted-foreground)] transition-colors group-hover:text-[var(--atlas-color-primary-400)]"
+                    className="size-4 shrink-0 text-neutral-400 transition-colors group-hover:text-primary-400"
                     aria-hidden
                   />
                 </button>

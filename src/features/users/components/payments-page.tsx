@@ -47,23 +47,23 @@ export function PaymentsPage() {
   };
 
   return (
-    <div className="account-fade-in-up space-y-10">
+    <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={CreditCardIcon}
         title="Payments & credits"
         description="Manage your credits and view transaction history"
       />
 
-      <div className="flex flex-col gap-4 rounded-2xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-container)] p-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 rounded-2xl border border-surface-border bg-neutral-700 p-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
-          <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-[linear-gradient(135deg,var(--atlas-color-primary-300),var(--atlas-color-primary-500))] text-[var(--atlas-color-neutral-700)] shadow-[var(--atlas-shadow-md)]">
+          <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-300 to-primary-500 text-neutral-700 shadow-[var(--atlas-shadow-md)]">
             <SparklesIcon className="size-5" strokeWidth={1.75} aria-hidden />
           </div>
           <div>
-            <p className="text-xs font-medium uppercase tracking-wider text-[var(--atlas-surface-muted-foreground)]">
+            <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">
               Available credits
             </p>
-            <p className="text-3xl font-bold tabular-nums text-[var(--atlas-surface-foreground)]">
+            <p className="text-3xl font-bold tabular-nums text-neutral-100">
               {MOCK_CREDITS}
             </p>
           </div>
@@ -80,44 +80,44 @@ export function PaymentsPage() {
       </div>
 
       <div className="space-y-4">
-        <h2 className="text-lg font-semibold text-[var(--atlas-surface-foreground)]">
+        <h2 className="text-lg font-semibold text-neutral-100">
           Transaction history
         </h2>
         <ul className="space-y-3">
           {MOCK_TRANSACTIONS.map((tx) => (
             <li
               key={tx.id}
-              className="flex items-center justify-between gap-4 rounded-xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] p-4 transition-colors hover:bg-[var(--atlas-surface-container-high)]"
+              className="flex items-center justify-between gap-4 rounded-xl border border-surface-border bg-surface p-4 transition-colors hover:bg-neutral-600"
             >
               <div className="flex min-w-0 items-center gap-4">
                 <div
                   className={[
                     'flex size-9 shrink-0 items-center justify-center rounded-full',
                     tx.type === 'purchase'
-                      ? 'bg-[color-mix(in_oklab,var(--atlas-color-auxiliary-500)_14%,transparent)] text-[var(--atlas-color-auxiliary-500)]'
+                      ? 'bg-auxiliary-500/15 text-auxiliary-500'
                       : tx.type === 'bonus'
-                        ? 'bg-[color-mix(in_oklab,var(--atlas-color-primary-500)_18%,transparent)] text-[var(--atlas-color-primary-500)]'
-                        : 'bg-[var(--atlas-surface-container-highest)] text-[var(--atlas-surface-muted-foreground)]',
+                        ? 'bg-primary-500/20 text-primary-500'
+                        : 'bg-neutral-600 text-neutral-400',
                   ].join(' ')}
                 >
                   <CreditCardIcon className="size-4" strokeWidth={1.75} aria-hidden />
                 </div>
                 <div className="min-w-0">
-                  <p className="text-sm font-medium text-[var(--atlas-surface-foreground)]">
+                  <p className="text-sm font-medium text-neutral-100">
                     {tx.description}
                   </p>
-                  <p className="text-xs text-[var(--atlas-surface-muted-foreground)]">{tx.date}</p>
+                  <p className="text-xs text-neutral-400">{tx.date}</p>
                 </div>
               </div>
               <div className="shrink-0 text-right">
                 {tx.amount ? (
-                  <p className="text-sm font-medium text-[var(--atlas-surface-foreground)]">{tx.amount}</p>
+                  <p className="text-sm font-medium text-neutral-100">{tx.amount}</p>
                 ) : null}
                 <p
                   className={
                     tx.credits > 0
-                      ? 'text-xs font-bold text-[var(--atlas-color-auxiliary-400)]'
-                      : 'text-xs font-bold text-[var(--atlas-color-primary-400)]'
+                      ? 'text-xs font-bold text-auxiliary-400'
+                      : 'text-xs font-bold text-primary-400'
                   }
                 >
                   {tx.credits > 0 ? `+${tx.credits}` : tx.credits} credits

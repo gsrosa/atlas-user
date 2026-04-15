@@ -280,14 +280,14 @@ function EditPanel({
 
   const cls = {
     input:
-      'w-full rounded-xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] px-3 py-2 text-sm text-[var(--atlas-surface-foreground)] placeholder:text-[var(--atlas-surface-muted-foreground)] focus:outline-none focus:ring-2 focus:ring-[var(--atlas-color-primary-400)]',
-    label: 'block text-xs font-medium text-[var(--atlas-surface-muted-foreground)]',
+      'w-full rounded-xl border border-surface-border bg-surface px-3 py-2 text-sm text-neutral-100 placeholder:text-neutral-400 focus:outline-none focus:ring-2 focus:ring-primary-400',
+    label: 'block text-xs font-medium text-neutral-400',
     section: 'space-y-2',
     sectionHeader: 'flex items-center justify-between',
-    sectionTitle: 'text-xs font-medium text-[var(--atlas-surface-muted-foreground)]',
-    addBtn: 'text-xs font-medium text-[var(--atlas-color-primary-400)] hover:underline',
-    removeBtn: 'p-1 text-[var(--atlas-surface-muted-foreground)] transition-colors hover:text-red-500',
-    card: 'space-y-2 rounded-xl border border-[var(--atlas-surface-border)] p-3',
+    sectionTitle: 'text-xs font-medium text-neutral-400',
+    addBtn: 'text-xs font-medium text-primary-400 hover:underline',
+    removeBtn: 'p-1 text-neutral-400 transition-colors hover:text-red-500',
+    card: 'space-y-2 rounded-xl border border-surface-border p-3',
   };
 
   return (
@@ -320,7 +320,7 @@ function EditPanel({
         )}
       </div>
 
-      <div className="h-px bg-[var(--atlas-surface-border)]" aria-hidden />
+      <div className="h-px bg-surface-border" aria-hidden />
 
       {/* Flights */}
       <div className={cls.section}>
@@ -329,7 +329,7 @@ function EditPanel({
           <button type="button" onClick={() => appendFlight({ flightNumber: '', departureDate: '', arrivalDate: '' })} className={cls.addBtn}>+ Add</button>
         </div>
         {flightFields.length === 0 && (
-          <p className="text-xs italic text-[var(--atlas-surface-muted-foreground)]">No flights added.</p>
+          <p className="text-xs italic text-neutral-400">No flights added.</p>
         )}
         {flightFields.map((field, idx) => (
           <div key={field.id} className={cls.card}>
@@ -358,7 +358,7 @@ function EditPanel({
           <button type="button" onClick={() => appendHotel({ name: '', checkinDate: '', checkoutDate: '' })} className={cls.addBtn}>+ Add</button>
         </div>
         {hotelFields.length === 0 && (
-          <p className="text-xs italic text-[var(--atlas-surface-muted-foreground)]">No hotels added.</p>
+          <p className="text-xs italic text-neutral-400">No hotels added.</p>
         )}
         {hotelFields.map((field, idx) => (
           <div key={field.id} className={cls.card}>
@@ -385,12 +385,12 @@ function EditPanel({
         ))}
       </div>
 
-      <div className="h-px bg-[var(--atlas-surface-border)]" aria-hidden />
+      <div className="h-px bg-surface-border" aria-hidden />
 
       {/* AI modifications */}
       <div className="space-y-2">
         <div className="flex items-center gap-1.5">
-          <SparklesIcon className="size-3.5 text-[var(--atlas-color-primary-400)]" aria-hidden />
+          <SparklesIcon className="size-3.5 text-primary-400" aria-hidden />
           <span className={cls.sectionTitle}>Additional modifications (optional)</span>
         </div>
         <textarea
@@ -400,7 +400,7 @@ function EditPanel({
           className={`${cls.input} resize-none`}
           disabled={isBusy}
         />
-        <p className="text-[11px] text-[var(--atlas-surface-muted-foreground)]">
+        <p className="text-[11px] text-neutral-400">
           Only used when you click "Save &amp; Adapt Plan".
         </p>
       </div>
@@ -411,7 +411,7 @@ function EditPanel({
           type="button"
           onClick={() => void onSaveAdapt()}
           disabled={isBusy}
-          className="flex w-full items-center justify-center gap-2 rounded-xl bg-[linear-gradient(135deg,var(--atlas-color-primary-300),var(--atlas-color-primary-500))] py-2.5 text-sm font-semibold text-[var(--atlas-color-neutral-700)] transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
+          className="flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-br from-primary-300 to-primary-500 py-2.5 text-sm font-semibold text-neutral-700 transition-opacity hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-50"
         >
           <SparklesIcon className="size-4" aria-hidden />
           {isAdapting ? 'Adapting plan…' : updatePlan.isPending ? 'Saving…' : 'Save & Adapt Plan'}
@@ -419,7 +419,7 @@ function EditPanel({
         <button
           type="submit"
           disabled={isBusy}
-          className="w-full rounded-xl border border-[var(--atlas-surface-border)] py-2.5 text-sm font-medium text-[var(--atlas-surface-foreground)] transition-colors hover:border-[var(--atlas-color-primary-400)] hover:text-[var(--atlas-color-primary-400)] disabled:cursor-not-allowed disabled:opacity-50"
+          className="w-full rounded-xl border border-surface-border py-2.5 text-sm font-medium text-neutral-100 transition-colors hover:border-primary-400 hover:text-primary-400 disabled:cursor-not-allowed disabled:opacity-50"
         >
           Save
         </button>
@@ -427,7 +427,7 @@ function EditPanel({
           type="button"
           onClick={onClose}
           disabled={isBusy}
-          className="w-full rounded-xl py-2 text-xs text-[var(--atlas-surface-muted-foreground)] transition-colors hover:text-[var(--atlas-surface-foreground)] disabled:opacity-50"
+          className="w-full rounded-xl py-2 text-xs text-neutral-400 transition-colors hover:text-neutral-100 disabled:opacity-50"
         >
           Cancel
         </button>
@@ -472,18 +472,18 @@ function PlanView({ itinerary, flightNumbers, daysCount, departureAt, arrivalAt 
 
       {/* Trip dates */}
       {(departureAt ?? arrivalAt) && (
-        <div className="flex flex-wrap items-center gap-6 rounded-xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] px-5 py-4">
+        <div className="flex flex-wrap items-center gap-6 rounded-xl border border-surface-border bg-surface px-5 py-4">
           {departureAt && (
             <div>
-              <p className="text-xs text-[var(--atlas-surface-muted-foreground)]">Departure</p>
-              <p className="text-sm font-medium text-[var(--atlas-surface-foreground)]">{formatDate(departureAt)}</p>
+              <p className="text-xs text-neutral-400">Departure</p>
+              <p className="text-sm font-medium text-neutral-100">{formatDate(departureAt)}</p>
             </div>
           )}
-          {departureAt && arrivalAt && <div className="h-8 w-px bg-[var(--atlas-surface-border)]" aria-hidden />}
+          {departureAt && arrivalAt && <div className="h-8 w-px bg-surface-border" aria-hidden />}
           {arrivalAt && (
             <div>
-              <p className="text-xs text-[var(--atlas-surface-muted-foreground)]">Return</p>
-              <p className="text-sm font-medium text-[var(--atlas-surface-foreground)]">{formatDate(arrivalAt)}</p>
+              <p className="text-xs text-neutral-400">Return</p>
+              <p className="text-sm font-medium text-neutral-100">{formatDate(arrivalAt)}</p>
             </div>
           )}
         </div>
@@ -495,11 +495,11 @@ function PlanView({ itinerary, flightNumbers, daysCount, departureAt, arrivalAt 
           {displayFlights.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {displayFlights.map((f, i) => (
-                <span key={`${f.flightNumber}-${i}`} className="inline-flex items-center gap-1.5 rounded-full border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-container)] px-3 py-1.5 text-xs font-medium text-[var(--atlas-surface-foreground)]">
+                <span key={`${f.flightNumber}-${i}`} className="inline-flex items-center gap-1.5 rounded-full border border-surface-border bg-neutral-700 px-3 py-1.5 text-xs font-medium text-neutral-100">
                   <PlaneTakeoffIcon className="size-3" aria-hidden />
                   {f.flightNumber}
                   {(f.departureDate ?? f.arrivalDate) && (
-                    <span className="text-[var(--atlas-surface-muted-foreground)]">
+                    <span className="text-neutral-400">
                       {f.departureDate && f.arrivalDate ? ` ${f.departureDate} → ${f.arrivalDate}` : f.departureDate ? ` ${f.departureDate}` : ` → ${f.arrivalDate}`}
                     </span>
                   )}
@@ -510,15 +510,15 @@ function PlanView({ itinerary, flightNumbers, daysCount, departureAt, arrivalAt 
           {metaHotels.length > 0 && (
             <div className="flex flex-wrap gap-2">
               {metaHotels.map((h, i) => (
-                <span key={`${h.name}-${i}`} className="inline-flex items-center gap-1.5 rounded-full border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-container)] px-3 py-1.5 text-xs font-medium text-[var(--atlas-surface-foreground)]">
+                <span key={`${h.name}-${i}`} className="inline-flex items-center gap-1.5 rounded-full border border-surface-border bg-neutral-700 px-3 py-1.5 text-xs font-medium text-neutral-100">
                   <BedDoubleIcon className="size-3" aria-hidden />
                   {h.name}
                   {(h.checkinDate ?? h.checkoutDate) && (
-                    <span className="text-[var(--atlas-surface-muted-foreground)]">
+                    <span className="text-neutral-400">
                       {h.checkinDate && h.checkoutDate ? ` ${h.checkinDate} → ${h.checkoutDate}` : h.checkinDate ? ` from ${h.checkinDate}` : ` until ${h.checkoutDate}`}
                     </span>
                   )}
-                  {h.neighborhood && <span className="text-[var(--atlas-surface-muted-foreground)]"> · {h.neighborhood}</span>}
+                  {h.neighborhood && <span className="text-neutral-400"> · {h.neighborhood}</span>}
                 </span>
               ))}
             </div>
@@ -563,8 +563,8 @@ export function TripDetailPage({ tripId }: { tripId: string }) {
       <AccountShell>
         <div className="flex min-h-[60dvh] items-center justify-center">
           <div className="flex flex-col items-center gap-3">
-            <div className="size-8 animate-spin rounded-full border-2 border-[var(--atlas-color-primary-400)] border-t-transparent" />
-            <p className="text-sm text-[var(--atlas-surface-muted-foreground)]">Loading trip…</p>
+            <div className="size-8 animate-spin rounded-full border-2 border-primary-400 border-t-transparent" />
+            <p className="text-sm text-neutral-400">Loading trip…</p>
           </div>
         </div>
       </AccountShell>
@@ -575,8 +575,8 @@ export function TripDetailPage({ tripId }: { tripId: string }) {
     return (
       <AccountShell>
         <div className="flex min-h-[60dvh] flex-col items-center justify-center gap-4 text-center">
-          <p className="text-sm text-[var(--atlas-surface-foreground)]">Trip not found.</p>
-          <button type="button" onClick={() => window.location.assign('/my-trips')} className="text-sm text-[var(--atlas-color-primary-400)] hover:underline">
+          <p className="text-sm text-neutral-100">Trip not found.</p>
+          <button type="button" onClick={() => window.location.assign('/my-trips')} className="text-sm text-primary-400 hover:underline">
             ← Back to plans
           </button>
         </div>
@@ -604,20 +604,20 @@ export function TripDetailPage({ tripId }: { tripId: string }) {
 
   return (
     <AccountShell>
-      <div className={`account-fade-in-up mx-auto w-full px-4 py-8 sm:px-6 ${isEditOpen ? 'max-w-6xl' : 'max-w-2xl'}`}>
+      <div className={`animate-account-fade-in-up mx-auto w-full px-4 py-8 sm:px-6 ${isEditOpen ? 'max-w-6xl' : 'max-w-2xl'}`}>
         {/* Header */}
         <div className="mb-8 flex items-start justify-between gap-4">
-          <button type="button" onClick={() => window.location.assign('/my-trips')} className="mt-1 flex items-center gap-1 text-sm text-[var(--atlas-surface-muted-foreground)] transition-colors hover:text-[var(--atlas-surface-foreground)]">
+          <button type="button" onClick={() => window.location.assign('/my-trips')} className="mt-1 flex items-center gap-1 text-sm text-neutral-400 transition-colors hover:text-neutral-100">
             <ArrowLeftIcon className="size-4" aria-hidden />
             My plans
           </button>
           {isEditOpen ? (
-            <button type="button" onClick={() => { setLocalItinerary(null); setIsEditOpen(false); }} className="flex items-center gap-1.5 rounded-xl border border-[var(--atlas-surface-border)] px-3 py-1.5 text-sm font-medium text-[var(--atlas-surface-muted-foreground)] transition-colors hover:border-[var(--atlas-color-primary-400)] hover:text-[var(--atlas-color-primary-400)]">
+            <button type="button" onClick={() => { setLocalItinerary(null); setIsEditOpen(false); }} className="flex items-center gap-1.5 rounded-xl border border-surface-border px-3 py-1.5 text-sm font-medium text-neutral-400 transition-colors hover:border-primary-400 hover:text-primary-400">
               <XIcon className="size-4" aria-hidden />
               Close editor
             </button>
           ) : (
-            <button type="button" onClick={() => { setLocalItinerary(null); setIsEditOpen(true); }} className="flex items-center gap-1.5 rounded-xl border border-[var(--atlas-surface-border)] px-3 py-1.5 text-sm font-medium text-[var(--atlas-surface-foreground)] transition-colors hover:border-[var(--atlas-color-primary-400)] hover:text-[var(--atlas-color-primary-400)]">
+            <button type="button" onClick={() => { setLocalItinerary(null); setIsEditOpen(true); }} className="flex items-center gap-1.5 rounded-xl border border-surface-border px-3 py-1.5 text-sm font-medium text-neutral-100 transition-colors hover:border-primary-400 hover:text-primary-400">
               <PencilIcon className="size-4" aria-hidden />
               Edit plan
             </button>
@@ -626,18 +626,18 @@ export function TripDetailPage({ tripId }: { tripId: string }) {
 
         {/* Title */}
         <div className="mb-6">
-          <h1 className="text-2xl font-bold text-[var(--atlas-surface-foreground)]">{displayTitle}</h1>
+          <h1 className="text-2xl font-bold text-neutral-100">{displayTitle}</h1>
           {plan.title && plan.destination && (
-            <p className="mt-1 text-sm text-[var(--atlas-surface-muted-foreground)]">{plan.destination}</p>
+            <p className="mt-1 text-sm text-neutral-400">{plan.destination}</p>
           )}
         </div>
 
         {isEditOpen ? (
           <div className="grid grid-cols-1 gap-8 lg:grid-cols-[1fr_380px]">
-            <div className="min-w-0 rounded-2xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] p-6">
+            <div className="min-w-0 rounded-2xl border border-surface-border bg-surface p-6">
               <PlanView itinerary={activeItinerary} flightNumbers={plan.flight_numbers} daysCount={plan.days_count} departureAt={plan.departure_at} arrivalAt={plan.arrival_at} />
             </div>
-            <div className="rounded-2xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] p-6">
+            <div className="rounded-2xl border border-surface-border bg-surface p-6">
               <EditPanel
                 tripId={tripId}
                 currentItinerary={activeItinerary}

@@ -16,7 +16,7 @@ type StepValueProps = {
 // ─── Value display atoms ──────────────────────────────────────────────────────
 
 const Unset = () => (
-  <span className="text-xs italic text-(--atlas-surface-muted-foreground)">—</span>
+  <span className="text-xs italic text-neutral-400">—</span>
 );
 
 const SingleChip = ({ step, prefs }: StepValueProps) => {
@@ -25,7 +25,7 @@ const SingleChip = ({ step, prefs }: StepValueProps) => {
   const opt = step.options?.find((o) => o.value === raw);
   if (!opt) return <Unset />;
   return (
-    <span className="inline-flex items-center gap-1.5 rounded-full border border-(--atlas-surface-border) bg-(--atlas-surface-container) px-2.5 py-1 text-sm font-medium text-(--atlas-surface-foreground)">
+    <span className="inline-flex items-center gap-1.5 rounded-full border border-surface-border bg-neutral-700 px-2.5 py-1 text-sm font-medium text-neutral-100">
       {opt.emoji && <span className="text-base leading-none">{opt.emoji}</span>}
       {opt.label}
     </span>
@@ -42,11 +42,11 @@ const ScaleDots = ({ step, prefs }: StepValueProps) => {
           key={n}
           className={cn(
             "size-2.5 rounded-full",
-            n <= raw ? "bg-(--atlas-color-primary-500)" : "bg-(--atlas-surface-border)",
+            n <= raw ? 'bg-primary-500' : 'bg-surface-border',
           )}
         />
       ))}
-      <span className="ml-1.5 text-xs text-(--atlas-surface-muted-foreground)">{raw}/5</span>
+      <span className="ml-1.5 text-xs text-neutral-400">{raw}/5</span>
     </span>
   );
 };
@@ -59,8 +59,8 @@ const BoolBadge = ({ step, prefs }: StepValueProps) => {
       className={cn(
         "inline-flex items-center rounded-full px-2.5 py-1 text-xs font-semibold",
         raw
-          ? "bg-[color-mix(in_oklab,var(--atlas-color-primary-500)_12%,transparent)] text-(--atlas-color-primary-500)"
-          : "bg-(--atlas-surface-container) text-(--atlas-surface-muted-foreground)",
+          ? "bg-primary-500/12 text-primary-500"
+          : "bg-neutral-700 text-neutral-400",
       )}
     >
       {raw ? "Yes" : "No"}
@@ -82,7 +82,7 @@ const MultiChips = ({ step, prefs }: StepValueProps) => {
         return (
           <span
             key={val}
-            className="inline-flex items-center gap-1 rounded-full bg-(--atlas-surface-container) px-2 py-0.5 text-xs font-medium text-(--atlas-surface-foreground)"
+            className="inline-flex items-center gap-1 rounded-full bg-neutral-700 px-2 py-0.5 text-xs font-medium text-neutral-100"
           >
             {opt?.emoji && <span className="leading-none">{opt.emoji}</span>}
             {opt?.label ?? val}
@@ -90,7 +90,7 @@ const MultiChips = ({ step, prefs }: StepValueProps) => {
         );
       })}
       {rest > 0 && (
-        <span className="inline-flex items-center rounded-full bg-(--atlas-surface-container) px-2 py-0.5 text-xs text-(--atlas-surface-muted-foreground)">
+        <span className="inline-flex items-center rounded-full bg-neutral-700 px-2 py-0.5 text-xs text-neutral-400">
           +{rest} more
         </span>
       )}
@@ -131,7 +131,7 @@ export const TravelerProfileSettingsPage = () => {
 
   if (isLoading) {
     return (
-      <div className="flex min-h-[40vh] items-center justify-center text-(--atlas-surface-muted-foreground)">
+      <div className="flex min-h-[40vh] items-center justify-center text-neutral-400">
         Loading…
       </div>
     );
@@ -143,13 +143,13 @@ export const TravelerProfileSettingsPage = () => {
   );
 
   return (
-    <div className="account-fade-in-up space-y-6">
+    <div className="animate-account-fade-in-up space-y-6">
       <div className="flex items-start justify-between gap-4">
         <div>
-          <h1 className="text-lg font-semibold text-(--atlas-surface-foreground) sm:text-xl">
+          <h1 className="text-lg font-semibold text-neutral-100 sm:text-xl">
             Travel preferences
           </h1>
-          <p className="mt-1 text-sm text-(--atlas-surface-muted-foreground)">
+          <p className="mt-1 text-sm text-neutral-400">
             Atlas uses these to personalise every trip plan to your style.
           </p>
         </div>
@@ -162,8 +162,8 @@ export const TravelerProfileSettingsPage = () => {
       </div>
 
       {!hasAny && (
-        <div className="rounded-2xl border border-(--atlas-surface-border) bg-(--atlas-surface-container-low) px-5 py-10 text-center">
-          <p className="text-sm text-(--atlas-surface-muted-foreground)">No preferences saved yet.</p>
+        <div className="rounded-2xl border border-surface-border bg-surface-muted px-5 py-10 text-center">
+          <p className="text-sm text-neutral-400">No preferences saved yet.</p>
           <Button variant="primary" size="md" className="mt-4" asChild>
             <a href="/profile/onboarding" className="no-underline">
               Start quick setup
@@ -182,9 +182,9 @@ export const TravelerProfileSettingsPage = () => {
             return (
               <section
                 key={sectionTitle}
-                className="rounded-2xl border border-(--atlas-surface-border) bg-(--atlas-surface-container-low) px-5 py-4 sm:px-6"
+                className="rounded-2xl border border-surface-border bg-surface-muted px-5 py-4 sm:px-6"
               >
-                <h2 className="mb-3 text-[10px] font-bold uppercase tracking-[0.15em] text-(--atlas-color-primary-500)">
+                <h2 className="mb-3 text-[10px] font-bold uppercase tracking-[0.15em] text-primary-500">
                   {sectionTitle}
                 </h2>
                 <div className="grid gap-x-8 gap-y-3 sm:grid-cols-2">
@@ -193,7 +193,7 @@ export const TravelerProfileSettingsPage = () => {
                       key={step.field}
                       className="flex min-w-0 items-center justify-between gap-3"
                     >
-                      <span className="shrink-0 text-xs text-(--atlas-surface-muted-foreground)">
+                      <span className="shrink-0 text-xs text-neutral-400">
                         {step.shortLabel}
                       </span>
                       <span className="flex min-w-0 flex-1 justify-end">

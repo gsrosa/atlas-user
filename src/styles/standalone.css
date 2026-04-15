@@ -6,14 +6,41 @@
 @source "../**/*.{js,ts,jsx,tsx}";
 @source "../../node_modules/@gsrosa/atlas-ui/src/**/*.{js,ts,jsx,tsx}";
 
-html,
-body,
-#root {
-  min-height: 100%;
-  margin: 0;
+@theme {
+  --animate-account-fade-in-up: account-fade-in-up 0.45s ease both;
+  @keyframes account-fade-in-up {
+    from {
+      opacity: 0;
+      transform: translateY(16px);
+    }
+    to {
+      opacity: 1;
+      transform: none;
+    }
+  }
+
+  --animate-stitch-aurora-drift: stitch-aurora-drift 18s ease-in-out infinite alternate;
+  @keyframes stitch-aurora-drift {
+    from {
+      transform: translate3d(-2%, 0, 0) scale(1);
+      opacity: 0.88;
+    }
+    to {
+      transform: translate3d(2%, 0, 0) scale(1.03);
+      opacity: 1;
+    }
+  }
 }
 
-body {
-  background-color: var(--atlas-surface-background);
-  color: var(--atlas-surface-foreground);
+@layer base {
+  html,
+  body,
+  #root {
+    min-height: 100%;
+    margin: 0;
+  }
+
+  body {
+    @apply bg-surface text-neutral-100;
+  }
 }

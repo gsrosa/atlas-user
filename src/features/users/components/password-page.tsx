@@ -10,7 +10,7 @@ export function PasswordPage() {
   const { register, formState: { errors } } = form;
 
   return (
-    <div className="account-fade-in-up space-y-10">
+    <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={LockIcon}
         title="Password"

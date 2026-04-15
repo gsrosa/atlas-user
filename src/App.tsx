@@ -1,10 +1,7 @@
 import { Toaster } from 'sonner';
 
-import { TravelerOnboardingPage } from '@/features/traveler-profile/traveler-onboarding-page';
-import { AccountLayout } from '@/features/users/account-layout';
-import { TripDetailPage } from '@/features/users/components/trip-detail-page';
-import { TripsListPage } from '@/features/users/components/trips-list-page';
-import '@/features/users/styles/account.css';
+import { TravelerOnboardingPage } from '@/features/traveler-profile';
+import { AccountLayout, TripDetailPage, TripsListPage } from '@/features/users';
 import { TrpcProvider } from '@/providers/trpc-provider';
 
 // ─── MFE root — exposed to the shell via Module Federation ────────────────────
@@ -26,12 +23,12 @@ function resolveView(): View {
   return { type: 'account' };
 }
 
-export default function App() {
+export function App() {
   const view = resolveView();
 
   return (
     <TrpcProvider>
-      <div className="flex min-h-full w-full min-w-0 flex-col bg-transparent font-[family-name:var(--atlas-font-sans)]">
+      <div className="flex min-h-full w-full min-w-0 flex-col bg-transparent font-sans">
         <div className="flex min-h-0 flex-1 flex-col">
           {view.type === 'detail' && <TripDetailPage tripId={view.tripId} />}
           {view.type === 'list' && <TripsListPage />}

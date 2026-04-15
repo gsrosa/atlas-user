@@ -37,7 +37,7 @@ export function ProfilePage() {
   })();
 
   return (
-    <div className="account-fade-in-up space-y-10">
+    <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={UserIcon}
         title="Profile"
@@ -45,24 +45,24 @@ export function ProfilePage() {
       />
 
       <div className="flex items-center gap-5">
-        <div className="relative size-20 shrink-0 overflow-hidden rounded-full border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-container-highest)]">
+        <div className="relative size-20 shrink-0 overflow-hidden rounded-full border border-surface-border bg-neutral-600">
           {avatarUrl ? (
             <img src={avatarUrl} alt="" className="size-full object-cover" referrerPolicy="no-referrer" />
           ) : (
-            <div className="flex size-full items-center justify-center text-xl font-semibold text-[var(--atlas-surface-foreground)]">
+            <div className="flex size-full items-center justify-center text-xl font-semibold text-neutral-100">
               {isLoadingProfile ? '…' : initials}
             </div>
           )}
         </div>
         <div>
           {isLoadingProfile ? (
-            <div className="h-4 w-32 animate-pulse rounded bg-[var(--atlas-surface-border)]" />
+            <div className="h-4 w-32 animate-pulse rounded bg-surface-border" />
           ) : (
             <>
-              <p className="font-medium text-[var(--atlas-surface-foreground)]">
+              <p className="font-medium text-neutral-100">
                 {firstName} {lastName}
               </p>
-              <p className="text-sm text-[var(--atlas-surface-muted-foreground)]">
+              <p className="text-sm text-neutral-400">
                 {profile?.email ?? ''}
               </p>
             </>

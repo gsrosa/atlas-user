@@ -54,16 +54,16 @@ export function TripsListPage() {
 
   return (
     <AccountShell>
-      <div className="account-fade-in-up mx-auto w-full max-w-2xl space-y-8 px-4 py-10 sm:px-6">
+      <div className="animate-account-fade-in-up mx-auto w-full max-w-2xl space-y-8 px-4 py-10 sm:px-6">
         {/* Header */}
         <div className="flex items-center justify-between">
-          <h1 className="text-2xl font-semibold text-[var(--atlas-surface-foreground)]">
+          <h1 className="text-2xl font-semibold text-neutral-100">
             My plans
           </h1>
           <button
             type="button"
             onClick={() => window.location.assign('/assistant')}
-            className="flex items-center gap-1.5 rounded-full bg-[linear-gradient(135deg,var(--atlas-color-primary-300),var(--atlas-color-primary-500))] px-4 py-2 text-sm font-semibold text-[var(--atlas-color-neutral-700)] transition-opacity hover:opacity-90"
+            className="flex items-center gap-1.5 rounded-full bg-gradient-to-br from-primary-300 to-primary-500 px-4 py-2 text-sm font-semibold text-neutral-700 transition-opacity hover:opacity-90"
           >
             <PlusIcon className="size-4" aria-hidden />
             New plan
@@ -76,7 +76,7 @@ export function TripsListPage() {
             {Array.from({ length: 3 }).map((_, i) => (
               <li
                 key={i}
-                className="h-24 animate-pulse rounded-2xl bg-[var(--atlas-surface-container)]"
+                className="h-24 animate-pulse rounded-2xl bg-neutral-700"
               />
             ))}
           </ul>
@@ -92,25 +92,25 @@ export function TripsListPage() {
         {/* Empty */}
         {!isLoading && !error && plans?.length === 0 && (
           <div className="flex flex-col items-center gap-4 py-16 text-center">
-            <div className="flex size-16 items-center justify-center rounded-2xl bg-[var(--atlas-surface-container)]">
+            <div className="flex size-16 items-center justify-center rounded-2xl bg-neutral-700">
               <MapPinIcon
-                className="size-8 text-[var(--atlas-surface-muted-foreground)] opacity-40"
+                className="size-8 text-neutral-400 opacity-40"
                 strokeWidth={1.25}
                 aria-hidden
               />
             </div>
             <div className="space-y-1">
-              <p className="font-medium text-[var(--atlas-surface-foreground)]">
+              <p className="font-medium text-neutral-100">
                 No plans yet
               </p>
-              <p className="text-sm text-[var(--atlas-surface-muted-foreground)]">
+              <p className="text-sm text-neutral-400">
                 Generate your first AI-powered trip itinerary
               </p>
             </div>
             <button
               type="button"
               onClick={() => window.location.assign('/assistant')}
-              className="rounded-full bg-[linear-gradient(135deg,var(--atlas-color-primary-300),var(--atlas-color-primary-500))] px-5 py-2 text-sm font-semibold text-[var(--atlas-color-neutral-700)] transition-opacity hover:opacity-90"
+              className="rounded-full bg-gradient-to-br from-primary-300 to-primary-500 px-5 py-2 text-sm font-semibold text-neutral-700 transition-opacity hover:opacity-90"
             >
               Plan a trip
             </button>
@@ -137,26 +137,26 @@ export function TripsListPage() {
                   <button
                     type="button"
                     onClick={() => window.location.assign(`/my-trips/${plan.id}`)}
-                    className="group flex w-full items-center gap-4 rounded-2xl border border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] p-5 text-left transition-colors hover:bg-[var(--atlas-surface-container-high)]"
+                    className="group flex w-full items-center gap-4 rounded-2xl border border-surface-border bg-surface p-5 text-left transition-colors hover:bg-neutral-600"
                   >
                     {/* Icon */}
-                    <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-[linear-gradient(135deg,var(--atlas-color-primary-300),var(--atlas-color-primary-500))] text-[var(--atlas-color-neutral-700)] shadow-[var(--atlas-shadow-sm)]">
+                    <div className="flex size-12 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary-300 to-primary-500 text-neutral-700 shadow-[var(--atlas-shadow-sm)]">
                       <MapPinIcon className="size-5" strokeWidth={1.75} aria-hidden />
                     </div>
 
                     {/* Info */}
                     <div className="min-w-0 flex-1 space-y-2">
                       <div>
-                        <p className="truncate font-semibold text-[var(--atlas-surface-foreground)]">
+                        <p className="truncate font-semibold text-neutral-100">
                           {displayName}
                         </p>
                         {subtitle && (
-                          <p className="truncate text-xs text-[var(--atlas-surface-muted-foreground)]">
+                          <p className="truncate text-xs text-neutral-400">
                             {subtitle}
                           </p>
                         )}
                         {departureLabel && (
-                          <p className="text-xs text-[var(--atlas-surface-muted-foreground)]">
+                          <p className="text-xs text-neutral-400">
                             {departureLabel}
                           </p>
                         )}
@@ -170,7 +170,7 @@ export function TripsListPage() {
                     </div>
 
                     <ChevronRightIcon
-                      className="size-4 shrink-0 text-[var(--atlas-surface-muted-foreground)] transition-colors group-hover:text-[var(--atlas-color-primary-400)]"
+                      className="size-4 shrink-0 text-neutral-400 transition-colors group-hover:text-primary-400"
                       aria-hidden
                     />
                   </button>

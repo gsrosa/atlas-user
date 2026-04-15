@@ -1,3 +1,4 @@
+import { cn } from '@gsrosa/atlas-ui';
 import { CreditCardIcon, LockIcon, MenuIcon, SlidersHorizontalIcon, UserIcon } from 'lucide-react';
 
 import type { AccountSectionId } from '@/features/users/account-section';
@@ -9,16 +10,16 @@ const items: { id: AccountSectionId; title: string; icon: typeof UserIcon }[] = 
   { id: 'preferences', title: 'Preferences', icon: SlidersHorizontalIcon },
 ];
 
-interface AccountSidebarProps {
+type AccountSidebarProps = {
   activeSection: AccountSectionId;
   onSelectSection: (id: AccountSectionId) => void;
   onNavigate?: () => void;
-}
+};
 
 export function AccountSidebar({ activeSection, onSelectSection, onNavigate }: AccountSidebarProps) {
   return (
     <aside className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto px-3 py-5 md:h-full md:px-4 md:py-6">
-      <p className="mb-3 px-2 text-xs font-medium uppercase tracking-[0.15em] text-[var(--atlas-surface-muted-foreground)]">
+      <p className="mb-3 px-2 text-xs font-medium uppercase tracking-[0.15em] text-neutral-400">
         Account
       </p>
       <nav className="flex flex-col gap-1" aria-label="Account sections">
@@ -33,12 +34,12 @@ export function AccountSidebar({ activeSection, onSelectSection, onNavigate }: A
                 onNavigate?.();
               }}
               aria-current={isActive ? 'page' : undefined}
-              className={[
+              className={cn(
                 'flex w-full items-center gap-3 rounded-[var(--atlas-radius-md)] px-3 py-2.5 text-left text-sm font-medium transition-colors',
                 isActive
-                  ? 'bg-[color-mix(in_oklab,var(--atlas-color-primary-500)_22%,transparent)] text-[var(--atlas-color-primary-400)]'
-                  : 'text-[var(--atlas-surface-muted-foreground)] hover:bg-[var(--atlas-surface-container)] hover:text-[var(--atlas-surface-foreground)]',
-              ].join(' ')}
+                  ? 'bg-primary-500/25 text-primary-400'
+                  : 'text-neutral-400 hover:bg-neutral-700 hover:text-neutral-100',
+              )}
             >
               <item.icon className="size-4 shrink-0" aria-hidden />
               {item.title}
@@ -50,27 +51,27 @@ export function AccountSidebar({ activeSection, onSelectSection, onNavigate }: A
   );
 }
 
-interface AccountMobileBarProps {
+type AccountMobileBarProps = {
   sectionTitle: string;
   onOpenNav: () => void;
-}
+};
 
 export function AccountMobileBar({ sectionTitle, onOpenNav }: AccountMobileBarProps) {
   return (
-    <div className="flex shrink-0 items-center gap-3 border-b border-[var(--atlas-surface-border)] bg-[var(--atlas-surface-background)] px-3 py-3 md:hidden">
+    <div className="flex shrink-0 items-center gap-3 border-b border-surface-border bg-surface px-3 py-3 md:hidden">
       <button
         type="button"
         onClick={onOpenNav}
-        className="flex size-10 shrink-0 items-center justify-center rounded-[var(--atlas-radius-md)] text-[var(--atlas-surface-foreground)] ring-1 ring-[var(--atlas-surface-border)] transition-colors hover:bg-[var(--atlas-surface-container)]"
+        className="flex size-10 shrink-0 items-center justify-center rounded-[var(--atlas-radius-md)] text-neutral-100 ring-1 ring-surface-border transition-colors hover:bg-neutral-700"
         aria-label="Open account menu"
       >
         <MenuIcon className="size-5" aria-hidden />
       </button>
       <div className="min-w-0 flex-1 text-center">
-        <p className="text-xs font-medium uppercase tracking-wider text-[var(--atlas-surface-muted-foreground)]">
+        <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">
           Account
         </p>
-        <p className="truncate text-sm font-semibold text-[var(--atlas-surface-foreground)]">
+        <p className="truncate text-sm font-semibold text-neutral-100">
           {sectionTitle}
         </p>
       </div>

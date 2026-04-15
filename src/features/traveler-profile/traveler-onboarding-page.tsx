@@ -52,18 +52,18 @@ const ChipSelect = ({ options, selected, onToggle }: ChipSelectProps) => (
           onClick={() => onToggle(opt.value)}
           className={cn(
             "group relative flex items-start gap-3 rounded-2xl p-4 text-left transition-all duration-300",
-            "min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--atlas-color-primary-400)",
+            "min-h-[44px] focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400",
             active
-              ? "bg-[color-mix(in_oklab,var(--atlas-color-primary-500)_10%,transparent)] ring-1 ring-(--atlas-color-primary-500)/40"
-              : "bg-(--atlas-surface-container-low) shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)] hover:bg-(--atlas-surface-container)",
+              ? "bg-primary-500/10 ring-1 ring-primary-500/40"
+              : "bg-surface-muted shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)] hover:bg-neutral-700",
           )}
         >
           <span
             className={cn(
               "mt-0.5 flex size-5 shrink-0 items-center justify-center rounded-full border-2 transition-all duration-300",
               active
-                ? "border-(--atlas-color-primary-500) bg-(--atlas-color-primary-500)"
-                : "border-(--atlas-surface-muted-foreground)/30",
+                ? 'border-primary-500 bg-primary-500'
+                : 'border-neutral-400/30',
             )}
           >
             {active && <CheckIcon aria-hidden size={10} strokeWidth={3} className="text-white" />}
@@ -76,15 +76,15 @@ const ChipSelect = ({ options, selected, onToggle }: ChipSelectProps) => (
                 className={cn(
                   "font-sans text-sm font-semibold transition-colors",
                   active
-                    ? "text-(--atlas-surface-foreground)"
-                    : "text-(--atlas-surface-muted-foreground) group-hover:text-(--atlas-surface-foreground)",
+                    ? "text-neutral-100"
+                    : "text-neutral-400 group-hover:text-neutral-100",
                 )}
               >
                 {opt.label}
               </span>
             </div>
             {opt.description && (
-              <p className="mt-1 pl-7 text-xs text-(--atlas-surface-muted-foreground)">
+              <p className="mt-1 pl-7 text-xs text-neutral-400">
                 {opt.description}
               </p>
             )}
@@ -106,7 +106,7 @@ type ScaleInputProps = {
 
 const ScaleInput = ({ value, minLabel, maxLabel, onChange }: ScaleInputProps) => (
   <div className="space-y-5">
-    <div className="flex items-center justify-between font-sans text-xs text-(--atlas-surface-muted-foreground)">
+    <div className="flex items-center justify-between font-sans text-xs text-neutral-400">
       <span>{minLabel}</span>
       <span>{maxLabel}</span>
     </div>
@@ -121,10 +121,10 @@ const ScaleInput = ({ value, minLabel, maxLabel, onChange }: ScaleInputProps) =>
             aria-pressed={sel}
             className={cn(
               "flex size-10 items-center justify-center rounded-xl font-sans text-sm font-bold transition-all duration-200",
-              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-(--atlas-color-primary-400)",
+              "focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-primary-400",
               sel
-                ? "scale-110 bg-(--atlas-color-primary-500) text-white shadow-[0_4px_12px_rgba(255,87,34,0.35)]"
-                : "bg-(--atlas-surface-container-low) text-(--atlas-surface-muted-foreground) shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)] hover:scale-105 hover:text-(--atlas-surface-foreground) active:scale-95",
+                ? 'scale-110 bg-primary-500 text-white shadow-[0_4px_12px_rgba(255,87,34,0.35)]'
+                : "bg-surface-muted text-neutral-400 shadow-[inset_0_0_0_1px_rgba(255,255,255,0.05)] hover:scale-105 hover:text-neutral-100 active:scale-95",
             )}
           >
             {n}
@@ -159,7 +159,7 @@ const QuestionBlock = ({ step, draft, onUpdate }: QuestionBlockProps) => {
 
   return (
     <div className="space-y-5">
-      <h2 className="font-display text-lg font-medium leading-snug text-(--atlas-surface-foreground)/90">
+      <h2 className="font-display text-lg font-medium leading-snug text-neutral-100/90">
         {step.title}
       </h2>
 
@@ -200,7 +200,7 @@ const QuestionBlock = ({ step, draft, onUpdate }: QuestionBlockProps) => {
               )
             }
           />
-          <p className="font-sans text-xs text-(--atlas-surface-muted-foreground)">
+          <p className="font-sans text-xs text-neutral-400">
             Select all that apply
           </p>
         </>
@@ -291,12 +291,12 @@ export const TravelerOnboardingPage = () => {
 
   if (done) {
     return (
-      <div className="flex min-h-dvh flex-col items-center justify-center gap-6 bg-(--atlas-surface-background) px-6 text-center">
+      <div className="flex min-h-dvh flex-col items-center justify-center gap-6 bg-surface px-6 text-center">
         <span className="text-6xl">{isEditing ? "✅" : "🎉"}</span>
-        <h1 className="font-display max-w-md text-2xl font-semibold text-(--atlas-surface-foreground) sm:text-3xl">
+        <h1 className="font-display max-w-md text-2xl font-semibold text-neutral-100 sm:text-3xl">
           {isEditing ? "Preferences updated." : "Atlas knows how you travel now."}
         </h1>
-        <p className="max-w-sm text-sm text-(--atlas-surface-muted-foreground)">
+        <p className="max-w-sm text-sm text-neutral-400">
           {isEditing
             ? "Your changes are saved. They'll shape every trip plan from here on."
             : "Every trip plan will be tuned to your style. You can come back and adjust anything at any time."}
@@ -309,7 +309,7 @@ export const TravelerOnboardingPage = () => {
         {!isEditing && (
           <a
             href="/profile/settings"
-            className="text-xs text-(--atlas-surface-muted-foreground) underline-offset-4 hover:underline"
+            className="text-xs text-neutral-400 underline-offset-4 hover:underline"
           >
             View profile settings
           </a>
@@ -320,15 +320,15 @@ export const TravelerOnboardingPage = () => {
 
   if (isLoading && Object.keys(draft).length === 0) {
     return (
-      <div className="flex min-h-dvh items-center justify-center bg-(--atlas-surface-background) text-(--atlas-surface-muted-foreground)">
+      <div className="flex min-h-dvh items-center justify-center bg-surface text-neutral-400">
         Loading…
       </div>
     );
   }
 
   return (
-    <div className="flex min-h-dvh flex-col bg-(--atlas-surface-background) text-(--atlas-surface-foreground)">
-      <header className="sticky top-0 z-50 border-b border-(--atlas-surface-border)/20 bg-(--atlas-surface-background)/80 backdrop-blur-xl">
+    <div className="flex min-h-dvh flex-col bg-surface text-neutral-100">
+      <header className="sticky top-0 z-50 border-b border-surface-border/20 bg-surface/80 backdrop-blur-xl">
         <div className="mx-auto flex max-w-2xl items-center justify-between px-6 py-4">
           <button
             type="button"
@@ -337,31 +337,31 @@ export const TravelerOnboardingPage = () => {
             className={cn(
               "flex min-h-[44px] items-center gap-1 px-2 font-sans text-sm transition-colors",
               isFirst
-                ? "cursor-not-allowed text-(--atlas-surface-muted-foreground)/30"
-                : "text-(--atlas-surface-muted-foreground) hover:text-(--atlas-surface-foreground)",
+                ? "cursor-not-allowed text-neutral-400/30"
+                : "text-neutral-400 hover:text-neutral-100",
             )}
           >
             ← Back
           </button>
 
           <div className="flex items-center gap-2">
-            <CompassIcon aria-hidden className="size-4 text-(--atlas-color-primary-500)" />
-            <span className="font-sans text-xs text-(--atlas-surface-muted-foreground)">
+            <CompassIcon aria-hidden className="size-4 text-primary-500" />
+            <span className="font-sans text-xs text-neutral-400">
               {sectionIdx + 1} of {total} sections
             </span>
           </div>
 
           <a
             href="/"
-            className="flex min-h-[44px] items-center px-2 font-sans text-xs text-(--atlas-surface-muted-foreground) transition-colors hover:text-(--atlas-surface-foreground)"
+            className="flex min-h-[44px] items-center px-2 font-sans text-xs text-neutral-400 transition-colors hover:text-neutral-100"
           >
             {isEditing ? "Cancel" : "Skip for now"}
           </a>
         </div>
 
-        <div className="h-[2px] bg-(--atlas-surface-container)">
+        <div className="h-[2px] bg-neutral-700">
           <div
-            className="h-full bg-(--atlas-color-primary-500) transition-all duration-500 ease-out"
+            className="h-full bg-primary-500 transition-all duration-500 ease-out"
             style={{ width: `${progressPct}%` }}
           />
         </div>
@@ -377,10 +377,10 @@ export const TravelerOnboardingPage = () => {
         >
           <div className="mb-10 text-center">
             <span className="mb-4 block text-5xl">{section.icon}</span>
-            <h1 className="font-display text-3xl font-semibold tracking-tight text-(--atlas-surface-foreground) md:text-4xl">
+            <h1 className="font-display text-3xl font-semibold tracking-tight text-neutral-100 md:text-4xl">
               {section.title}
             </h1>
-            <p className="mt-2 font-sans text-sm text-(--atlas-surface-muted-foreground)">
+            <p className="mt-2 font-sans text-sm text-neutral-400">
               {section.subtitle}
             </p>
           </div>

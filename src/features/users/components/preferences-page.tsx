@@ -1,4 +1,4 @@
-import { TravelerProfileSettingsPage } from '@/features/traveler-profile/traveler-profile-settings-page';
+import { TravelerProfileSettingsPage } from '@/features/traveler-profile';
 
 export function PreferencesPage() {
   return <TravelerProfileSettingsPage />;
