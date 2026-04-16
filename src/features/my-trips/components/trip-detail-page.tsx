@@ -291,6 +291,7 @@ const EditPanel = ({
       const updated = await applyPlanModification(currentItinerary, prompt)
       onItineraryChange(updated as ItineraryDoc)
       adapted = updated as ItineraryDoc
+      window.dispatchEvent(new CustomEvent('atlas:credits-updated'))
     } catch (err) {
       toast.error(err instanceof Error ? err.message : 'Failed to adapt plan')
       setIsAdapting(false)

@@ -12,6 +12,10 @@ export const applyPlanModification = async (
     credentials: 'include',
     body: JSON.stringify({ itinerary, request }),
   })
+  if (res.status === 402) {
+    window.dispatchEvent(new CustomEvent('atlas:open-purchase-modal'))
+    throw new Error('Insufficient credits')
+  }
   if (!res.ok) {
     const text = await res.text()
     throw new Error(`Modify failed ${res.status}: ${text}`)
