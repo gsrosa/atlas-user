@@ -22,7 +22,7 @@ const GENDER_OPTIONS = [
   { value: 'prefer_not_to_say', label: 'Prefer not to say' },
 ] as const;
 
-export function ProfilePage() {
+function ProfilePage() {
   const { form, profile, isLoadingProfile, isSubmitting, onSubmit } = useProfileForm();
   const { register, control, formState: { errors } } = form;
 
@@ -187,3 +187,6 @@ export function ProfilePage() {
     </div>
   );
 }
+
+export { ProfilePage };
+export default ProfilePage;

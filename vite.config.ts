@@ -14,11 +14,16 @@ export default defineConfig({
       exposes: {
         './App': './src/bootstrap.tsx',
         './Skeleton': './src/skeleton.tsx',
+        './ProfileLayout': './src/features/users/profile-layout.tsx',
+        './ProfileAboutPage': './src/features/users/components/profile-page.tsx',
+        './ProfilePasswordPage': './src/features/users/components/password-page.tsx',
+        './ProfilePreferencesPage': './src/features/users/components/preferences-page.tsx',
       },
       shared: {
         '@gsrosa/atlas-ui': { singleton: true, requiredVersion: false as const },
         react: { singleton: true, requiredVersion: '^19.0.0' },
         'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
+        'react-router-dom': { singleton: true, requiredVersion: '^7.0.0' },
         'lucide-react': {
           singleton: true,
           requiredVersion: '^1.7.0',

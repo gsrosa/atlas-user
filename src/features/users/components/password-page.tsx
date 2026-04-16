@@ -5,7 +5,7 @@ import { AccountSectionHeader } from '@/features/users/components/account-sectio
 import { FormField } from '@/features/users/components/form-field';
 import { usePasswordForm } from '@/features/users/hooks/use-password-form';
 
-export function PasswordPage() {
+function PasswordPage() {
   const { form, isSubmitting, onSubmit } = usePasswordForm();
   const { register, formState: { errors } } = form;
 
@@ -70,3 +70,6 @@ export function PasswordPage() {
     </div>
   );
 }
+
+export { PasswordPage };
+export default PasswordPage;
