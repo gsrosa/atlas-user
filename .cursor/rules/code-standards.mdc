@@ -7,7 +7,7 @@ Authoritative rules live in the monorepo root: `.ai/rules/` (especially `core.md
 
 ## Quick reference
 
-- **React**: `import React from 'react'`; use `React.useState` / `React.useEffect` — never destructure hooks from `react`.
+- **React**: `import React from 'react'`; use `React.useState` / `React.useEffect` — never destructure hooks from `react`. Just import the React if necessary.
 - **Exports**: Named exports for components; Module Federation entry files may re-export `default` for remotes only (`bootstrap.tsx`, `skeleton.tsx`).
 - **Imports**: `@/` for `src/`; **import other features only via their `index.ts`**. Import order: React → external packages → `@/` → `./` (same folder).
 - **Files**: Kebab-case file and folder names.

@@ -45,7 +45,7 @@ export function ProfilePage() {
       />
 
       <div className="flex items-center gap-5">
-        <div className="relative size-20 shrink-0 overflow-hidden rounded-full border border-surface-border bg-neutral-600">
+        <div className="relative size-20 shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-600">
           {avatarUrl ? (
             <img src={avatarUrl} alt="" className="size-full object-cover" referrerPolicy="no-referrer" />
           ) : (
@@ -56,7 +56,7 @@ export function ProfilePage() {
         </div>
         <div>
           {isLoadingProfile ? (
-            <div className="h-4 w-32 animate-pulse rounded bg-surface-border" />
+            <div className="h-4 w-32 animate-pulse rounded bg-neutral-700" />
           ) : (
             <>
               <p className="font-medium text-neutral-100">

@@ -13,7 +13,10 @@ type FormFieldProps = {
 export function FormField({ label, htmlFor, error, hint, children, className }: FormFieldProps) {
   return (
     <div className={cn('space-y-2', className)}>
-      <Label htmlFor={htmlFor} className="text-xs uppercase tracking-wider">
+      <Label
+        htmlFor={htmlFor}
+        className="text-xs font-semibold uppercase tracking-wider text-neutral-400"
+      >
         {label}
       </Label>
       {children}

@@ -4,6 +4,8 @@
   "version": "0.1.0",
   "type": "module",
   "scripts": {
+    "build:atlas-ui": "npm run build --prefix ../atlas-ui",
+    "dev:fresh": "rm -rf node_modules/.vite && vite",
     "dev": "vite",
     "build": "tsc -b && vite build",
     "preview": "vite preview"

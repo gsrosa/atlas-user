@@ -1,0 +1,178 @@
+import React from "react"
+
+import { Button, cn } from "@gsrosa/atlas-ui"
+import { Controller } from "react-hook-form"
+import { ChevronRightIcon, CompassIcon } from "lucide-react"
+
+import { PROFILE_SECTIONS, PROFILE_QUESTIONS } from "@/features/traveler-profile/shared/constants"
+import { canProceedSection } from "@/features/traveler-profile/shared/form-validation"
+import { useTravelerProfileForm } from "@/features/traveler-profile/hooks/use-traveler-profile-form"
+import type { TravelerProfileFormValues } from "@/features/traveler-profile/shared/schema"
+
+import { QuestionBlock } from "./question-block"
+
+const GROUPED = PROFILE_SECTIONS.map((sec) => ({
+  ...sec,
+  steps: PROFILE_QUESTIONS.filter((s) => s.sectionIndex === sec.index),
+}))
+
+export const TravelerProfileFormPage = () => {
+  const { form, isLoading, isEditing, isPending, isSuccess, handleFormSubmit } = useTravelerProfileForm()
+  const { control, watch } = form
+
+  const [sectionIdx, setSectionIdx] = React.useState(0)
+  const [direction, setDirection] = React.useState<"forward" | "back">("forward")
+
+  const total = GROUPED.length
+  const section = GROUPED[sectionIdx]!
+  const isFirst = sectionIdx === 0
+  const isLast = sectionIdx === total - 1
+  const progressPct = ((sectionIdx + 1) / total) * 100
+
+  const values = watch()
+  const canProceed = canProceedSection(section.steps, values)
+
+  const handleBack = () => {
+    if (isFirst) return
+    setDirection("back")
+    setSectionIdx((i) => i - 1)
+  }
+
+  const handleNext = () => {
+    if (!isLast) {
+      setDirection("forward")
+      setSectionIdx((i) => i + 1)
+      return
+    }
+    void handleFormSubmit()
+  }
+
+  if (isSuccess) {
+    return (
+      <div className="flex min-h-dvh flex-col items-center justify-center gap-6 bg-neutral-900 px-6 text-center">
+        <span className="text-6xl">{isEditing ? "✅" : "🎉"}</span>
+        <h1 className="font-display max-w-md text-2xl font-semibold text-neutral-100 sm:text-3xl">
+          {isEditing ? "Preferences updated." : "Atlas knows how you travel now."}
+        </h1>
+        <p className="max-w-sm text-sm text-neutral-400">
+          {isEditing
+            ? "Your changes are saved. They'll shape every trip plan from here on."
+            : "Every trip plan will be tuned to your style. You can come back and adjust anything at any time."}
+        </p>
+        <Button variant="primary" size="lg" asChild>
+          <a href={isEditing ? "/profile/settings" : "/"} className="no-underline">
+            {isEditing ? "Back to preferences" : "Start planning"}
+          </a>
+        </Button>
+        {!isEditing && (
+          <a
+            href="/profile/settings"
+            className="text-xs text-neutral-400 underline-offset-4 hover:underline"
+          >
+            View profile settings
+          </a>
+        )}
+      </div>
+    )
+  }
+
+  if (isLoading && Object.keys(values).length === 0) {
+    return (
+      <div className="flex min-h-dvh items-center justify-center bg-neutral-900 text-neutral-400">
+        Loading…
+      </div>
+    )
+  }
+
+  return (
+    <div className="flex min-h-dvh flex-col bg-neutral-900 text-neutral-100">
+      <header className="sticky top-0 z-50 border-b border-neutral-800/20 bg-neutral-900/80 backdrop-blur-xl">
+        <div className="mx-auto flex max-w-2xl items-center justify-between px-6 py-4">
+          <button
+            type="button"
+            onClick={handleBack}
+            disabled={isFirst}
+            className={cn(
+              "flex min-h-[44px] items-center gap-1 px-2 font-sans text-sm transition-colors",
+              isFirst
+                ? "cursor-not-allowed text-neutral-400/30"
+                : "text-neutral-400 hover:text-neutral-100",
+            )}
+          >
+            ← Back
+          </button>
+
+          <div className="flex items-center gap-2">
+            <CompassIcon aria-hidden className="size-4 text-primary-500" />
+            <span className="font-sans text-xs text-neutral-400">
+              {sectionIdx + 1} of {total} sections
+            </span>
+          </div>
+
+          <a
+            href="/"
+            className="flex min-h-[44px] items-center px-2 font-sans text-xs text-neutral-400 transition-colors hover:text-neutral-100"
+          >
+            {isEditing ? "Cancel" : "Skip for now"}
+          </a>
+        </div>
+
+        <div className="h-[2px] bg-neutral-700">
+          <div
+            className="h-full bg-primary-500 transition-all duration-500 ease-out"
+            style={{ width: `${progressPct}%` }}
+          />
+        </div>
+      </header>
+
+      <main className="flex flex-1 flex-col items-center px-6 pb-16 pt-12">
+        <div
+          key={section.index}
+          className={cn(
+            "w-full max-w-2xl animate-in fade-in duration-400",
+            direction === "forward" ? "slide-in-from-right-4" : "slide-in-from-left-4",
+          )}
+        >
+          <div className="mb-10 text-center">
+            <span className="mb-4 block text-5xl">{section.icon}</span>
+            <h1 className="font-display text-3xl font-semibold tracking-tight text-neutral-100 md:text-4xl">
+              {section.title}
+            </h1>
+            <p className="mt-2 font-sans text-sm text-neutral-400">{section.subtitle}</p>
+          </div>
+
+          <div className="space-y-10">
+            {section.steps.map((step) => (
+              <Controller
+                key={step.field}
+                control={control}
+                name={step.field as keyof TravelerProfileFormValues}
+                render={({ field }) => (
+                  <QuestionBlock
+                    step={step}
+                    value={field.value}
+                    onChange={field.onChange}
+                  />
+                )}
+              />
+            ))}
+          </div>
+
+          <div className="mt-10 flex justify-end">
+            <Button
+              type="button"
+              variant="primary"
+              size="lg"
+              disabled={!canProceed || isPending}
+              onClick={handleNext}
+              className="flex items-center gap-2"
+            >
+              {isLast ? (isEditing ? "Save changes" : "Save profile") : "Continue"}
+              {!isLast && <ChevronRightIcon aria-hidden size={16} strokeWidth={2.5} />}
+            </Button>
+          </div>
+        </div>
+      </main>
+    </div>
+  )
+}

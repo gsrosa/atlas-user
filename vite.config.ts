@@ -35,11 +35,20 @@ export default defineConfig({
     port: 3003,
     strictPort: true,
     cors: true,
+    headers: {
+      'Cache-Control': 'no-store',
+    },
   },
   preview: {
     port: 3003,
     strictPort: true,
     cors: true,
+    headers: {
+      'Cache-Control': 'no-store',
+    },
+  },
+  optimizeDeps: {
+    exclude: ['@gsrosa/atlas-ui'],
   },
   build: {
     target: 'esnext',

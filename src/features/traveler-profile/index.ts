@@ -1,2 +1,2 @@
-export { TravelerOnboardingPage } from './traveler-onboarding-page';
-export { TravelerProfileSettingsPage } from './traveler-profile-settings-page';
+export { TravelerProfileFormPage } from "./components/traveler-profile-form-page"
+export { TravelerProfileSettingsPage } from "./components/traveler-profile-settings-page"

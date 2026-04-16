@@ -58,11 +58,11 @@ type AccountMobileBarProps = {
 
 export function AccountMobileBar({ sectionTitle, onOpenNav }: AccountMobileBarProps) {
   return (
-    <div className="flex shrink-0 items-center gap-3 border-b border-surface-border bg-surface px-3 py-3 md:hidden">
+    <div className="flex shrink-0 items-center gap-3 border-b border-neutral-700 bg-neutral-800 px-3 py-3 md:hidden">
       <button
         type="button"
         onClick={onOpenNav}
-        className="flex size-10 shrink-0 items-center justify-center rounded-[var(--atlas-radius-md)] text-neutral-100 ring-1 ring-surface-border transition-colors hover:bg-neutral-700"
+        className="flex size-10 shrink-0 items-center justify-center rounded-[var(--atlas-radius-md)] text-neutral-100 ring-1 ring-neutral-700 transition-colors hover:bg-neutral-700"
         aria-label="Open account menu"
       >
         <MenuIcon className="size-5" aria-hidden />

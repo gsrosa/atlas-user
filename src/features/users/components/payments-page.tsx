@@ -54,7 +54,7 @@ export function PaymentsPage() {
         description="Manage your credits and view transaction history"
       />
 
-      <div className="flex flex-col gap-4 rounded-2xl border border-surface-border bg-neutral-700 p-6 sm:flex-row sm:items-center sm:justify-between">
+      <div className="flex flex-col gap-4 rounded-2xl border border-neutral-700 bg-neutral-800 p-6 sm:flex-row sm:items-center sm:justify-between">
         <div className="flex items-center gap-4">
           <div className="flex size-12 shrink-0 items-center justify-center rounded-full bg-gradient-to-br from-primary-300 to-primary-500 text-neutral-700 shadow-[var(--atlas-shadow-md)]">
             <SparklesIcon className="size-5" strokeWidth={1.75} aria-hidden />
@@ -87,7 +87,7 @@ export function PaymentsPage() {
           {MOCK_TRANSACTIONS.map((tx) => (
             <li
               key={tx.id}
-              className="flex items-center justify-between gap-4 rounded-xl border border-surface-border bg-surface p-4 transition-colors hover:bg-neutral-600"
+              className="flex items-center justify-between gap-4 rounded-2xl border border-neutral-700 bg-neutral-800 p-5 transition-colors hover:bg-neutral-700"
             >
               <div className="flex min-w-0 items-center gap-4">
                 <div
@@ -97,7 +97,7 @@ export function PaymentsPage() {
                       ? 'bg-auxiliary-500/15 text-auxiliary-500'
                       : tx.type === 'bonus'
                         ? 'bg-primary-500/20 text-primary-500'
-                        : 'bg-neutral-600 text-neutral-400',
+                        : 'bg-neutral-700 text-neutral-400',
                   ].join(' ')}
                 >
                   <CreditCardIcon className="size-4" strokeWidth={1.75} aria-hidden />
