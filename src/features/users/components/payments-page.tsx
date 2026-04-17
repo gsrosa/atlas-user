@@ -1,47 +1,47 @@
+import React from 'react';
+
 import { Button } from '@gsrosa/atlas-ui';
-import { CreditCardIcon, PlusIcon, SparklesIcon } from 'lucide-react';
+import { ChevronLeftIcon, ChevronRightIcon, CreditCardIcon, PlusIcon, SparklesIcon } from 'lucide-react';
 import { toast } from 'sonner';
 
+import { trpc } from '@/lib/trpc';
 import { AccountSectionHeader } from '@/features/users/components/account-section-header';
 
-const MOCK_CREDITS = 12;
+const PAGE_SIZE = 10;
 
-const MOCK_TRANSACTIONS = [
-  {
-    id: '1',
-    date: '2026-03-25',
-    description: '10 Credits Pack',
-    amount: '$9.99',
-    credits: 10,
-    type: 'purchase' as const,
-  },
-  {
-    id: '2',
-    date: '2026-03-20',
-    description: 'Plan Generated — Kyoto, Japan',
-    amount: '',
-    credits: -2,
-    type: 'usage' as const,
-  },
-  {
-    id: '3',
-    date: '2026-03-18',
-    description: 'Plan Edited — Kyoto, Japan',
-    amount: '',
-    credits: -1,
-    type: 'usage' as const,
-  },
-  {
-    id: '4',
-    date: '2026-03-10',
-    description: 'Welcome Bonus',
-    amount: 'Free',
-    credits: 5,
-    type: 'bonus' as const,
-  },
-];
+function formatDate(iso: string): string {
+  return new Date(iso).toLocaleDateString('en-US', {
+    year: 'numeric',
+    month: 'short',
+    day: 'numeric',
+  });
+}
+
+function formatReason(reason: string): string {
+  return reason
+    .replace(/_/g, ' ')
+    .replace(/\b\w/g, (c) => c.toUpperCase());
+}
+
+function txType(amount: number, reason: string): 'purchase' | 'bonus' | 'usage' {
+  if (amount > 0 && reason.includes('topup')) return 'purchase';
+  if (amount > 0) return 'bonus';
+  return 'usage';
+}
 
 export function PaymentsPage() {
+  const [page, setPage] = React.useState(0);
+
+  const balanceQuery = trpc.credits.balance.useQuery();
+  const listQuery = trpc.credits.list.useQuery({ limit: PAGE_SIZE, page });
+
+  const balance = balanceQuery.data?.balance ?? 0;
+  const transactions = listQuery.data?.transactions ?? [];
+  const total = listQuery.data?.total ?? 0;
+  const totalPages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const hasPrev = page > 0;
+  const hasNext = page < totalPages - 1;
+
   const handleBuyCredits = () => {
     toast.message('Credit purchase will connect to checkout when ready.');
   };
@@ -63,9 +63,13 @@ export function PaymentsPage() {
             <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">
               Available credits
             </p>
-            <p className="text-3xl font-bold tabular-nums text-neutral-100">
-              {MOCK_CREDITS}
-            </p>
+            {balanceQuery.isLoading ? (
+              <span className="mt-1 block h-8 w-12 animate-pulse rounded bg-neutral-700" />
+            ) : (
+              <p className="text-3xl font-bold tabular-nums text-neutral-100">
+                {balance}
+              </p>
+            )}
           </div>
         </div>
         <Button
@@ -83,49 +87,102 @@ export function PaymentsPage() {
         <h2 className="text-lg font-semibold text-neutral-100">
           Transaction history
         </h2>
-        <ul className="space-y-3">
-          {MOCK_TRANSACTIONS.map((tx) => (
-            <li
-              key={tx.id}
-              className="flex items-center justify-between gap-4 rounded-2xl border border-neutral-700 bg-neutral-800 p-5 transition-colors hover:bg-neutral-700"
-            >
-              <div className="flex min-w-0 items-center gap-4">
-                <div
-                  className={[
-                    'flex size-9 shrink-0 items-center justify-center rounded-full',
-                    tx.type === 'purchase'
-                      ? 'bg-auxiliary-500/15 text-auxiliary-500'
-                      : tx.type === 'bonus'
-                        ? 'bg-primary-500/20 text-primary-500'
-                        : 'bg-neutral-700 text-neutral-400',
-                  ].join(' ')}
+
+        {listQuery.isLoading && (
+          <ul className="space-y-3" aria-label="Loading transactions">
+            {Array.from({ length: 5 }).map((_, i) => (
+              <li
+                key={i}
+                className="h-[72px] animate-pulse rounded-2xl bg-neutral-800"
+              />
+            ))}
+          </ul>
+        )}
+
+        {listQuery.error && (
+          <p className="text-sm text-red-400">Failed to load transactions.</p>
+        )}
+
+        {!listQuery.isLoading && !listQuery.error && transactions.length === 0 && (
+          <p className="text-sm text-neutral-400">No transactions yet.</p>
+        )}
+
+        {!listQuery.isLoading && !listQuery.error && transactions.length > 0 && (
+          <ul className="space-y-3">
+            {transactions.map((tx) => {
+              const type = txType(tx.amount, tx.reason);
+              return (
+                <li
+                  key={tx.id}
+                  className="flex items-center justify-between gap-4 rounded-2xl border border-neutral-700 bg-neutral-800 p-5 transition-colors hover:bg-neutral-700"
                 >
-                  <CreditCardIcon className="size-4" strokeWidth={1.75} aria-hidden />
-                </div>
-                <div className="min-w-0">
-                  <p className="text-sm font-medium text-neutral-100">
-                    {tx.description}
-                  </p>
-                  <p className="text-xs text-neutral-400">{tx.date}</p>
-                </div>
-              </div>
-              <div className="shrink-0 text-right">
-                {tx.amount ? (
-                  <p className="text-sm font-medium text-neutral-100">{tx.amount}</p>
-                ) : null}
-                <p
-                  className={
-                    tx.credits > 0
-                      ? 'text-xs font-bold text-auxiliary-400'
-                      : 'text-xs font-bold text-primary-400'
-                  }
-                >
-                  {tx.credits > 0 ? `+${tx.credits}` : tx.credits} credits
-                </p>
-              </div>
-            </li>
-          ))}
-        </ul>
+                  <div className="flex min-w-0 items-center gap-4">
+                    <div
+                      className={[
+                        'flex size-9 shrink-0 items-center justify-center rounded-full',
+                        type === 'purchase'
+                          ? 'bg-auxiliary-500/15 text-auxiliary-500'
+                          : type === 'bonus'
+                            ? 'bg-primary-500/20 text-primary-500'
+                            : 'bg-neutral-700 text-neutral-400',
+                      ].join(' ')}
+                    >
+                      <CreditCardIcon className="size-4" strokeWidth={1.75} aria-hidden />
+                    </div>
+                    <div className="min-w-0">
+                      <p className="text-sm font-medium text-neutral-100">
+                        {formatReason(tx.reason)}
+                      </p>
+                      <p className="text-xs text-neutral-400">{formatDate(tx.created_at)}</p>
+                    </div>
+                  </div>
+                  <div className="shrink-0 text-right">
+                    <p
+                      className={
+                        tx.amount > 0
+                          ? 'text-xs font-bold text-auxiliary-400'
+                          : 'text-xs font-bold text-primary-400'
+                      }
+                    >
+                      {tx.amount > 0 ? `+${tx.amount}` : tx.amount} credits
+                    </p>
+                    <p className="text-xs text-neutral-500">{tx.balance_after} bal</p>
+                  </div>
+                </li>
+              );
+            })}
+          </ul>
+        )}
+
+        <div className="flex items-center justify-between pt-2">
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            disabled={!hasPrev}
+            aria-label="Previous page"
+            onClick={() => setPage((p) => p - 1)}
+            className="gap-1"
+          >
+            <ChevronLeftIcon className="size-4" aria-hidden />
+            Previous
+          </Button>
+          <span className="text-sm text-neutral-400">
+            Page {page + 1} of {totalPages}
+          </span>
+          <Button
+            type="button"
+            variant="ghost"
+            size="sm"
+            disabled={!hasNext}
+            aria-label="Next page"
+            onClick={() => setPage((p) => p + 1)}
+            className="gap-1"
+          >
+            Next
+            <ChevronRightIcon className="size-4" aria-hidden />
+          </Button>
+        </div>
       </div>
     </div>
   );
