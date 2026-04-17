@@ -1,5 +1,7 @@
+import React from 'react';
+
 import { render, screen } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import UserAppSkeleton from '@/skeleton';
 
@@ -15,7 +17,7 @@ const setPath = (pathname: string) => {
   window.history.pushState({}, '', pathname);
 };
 
-describe('UserAppSkeleton', () => {
+describe('UserAppSkeleton (integration)', () => {
   beforeEach(() => {
     setPath('/');
   });

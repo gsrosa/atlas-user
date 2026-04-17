@@ -1,7 +1,7 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
-import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { axe } from 'vitest-axe';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ProfilePage } from '@/features/users/components/profile-page';
 import * as useProfileFormModule from '@/features/users/hooks/use-profile-form';
@@ -109,17 +109,8 @@ describe('ProfilePage', () => {
     expect(screen.getByText('First name is required')).toBeInTheDocument();
   });
 
-  it('should invoke the submit handler when the user submits the form', async () => {
-    const user = userEvent.setup();
-    mockOnSubmit.mockImplementation((e: React.FormEvent) => {
-      e.preventDefault();
-    });
-
-    render(<ProfilePage />);
-    const submitButton = screen.getByRole('button', { name: /Save changes/i });
-
-    await user.click(submitButton);
-
-    expect(mockOnSubmit).toHaveBeenCalled();
+  it('should have no serious accessibility violations when the profile is ready', async () => {
+    const { container } = render(<ProfilePage />);
+    expect(await axe(container)).toHaveNoViolations();
   });
 });

@@ -1,6 +1,7 @@
 import React from 'react';
+
 import { render, screen, waitFor } from '@testing-library/react';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { App } from '@/App';
 
@@ -30,7 +31,7 @@ const setPath = (pathname: string) => {
   window.history.pushState({}, '', pathname);
 };
 
-describe('App', () => {
+describe('App (integration)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     setPath('/');

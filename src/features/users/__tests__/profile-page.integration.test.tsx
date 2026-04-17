@@ -1,12 +1,12 @@
+import React from 'react';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { trpc } from '@/lib/trpc';
 
-import { ProfilePage } from './profile-page';
+import { ProfilePage } from '@/features/users/components/profile-page';
 
-// Mock trpc
 vi.mock('@/lib/trpc', () => {
   return {
     trpc: {
