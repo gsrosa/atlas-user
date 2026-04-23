@@ -53,7 +53,13 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['@gsrosa/atlas-ui'],
+    exclude: [
+      '@gsrosa/atlas-ui',
+      'react',
+      'react-dom',
+      'react-router-dom',
+      'lucide-react',
+    ],
   },
   build: {
     target: 'esnext',

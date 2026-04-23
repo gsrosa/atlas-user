@@ -1,11 +1,13 @@
 import { Button, Input } from '@gsrosa/atlas-ui';
 import { LockIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 
 import { AccountSectionHeader } from '@/features/users/components/account-section-header';
 import { FormField } from '@/features/users/components/form-field';
 import { usePasswordForm } from '@/features/users/hooks/use-password-form';
 
 function PasswordPage() {
+  const { t } = useTranslation('profile');
   const { form, isSubmitting, onSubmit } = usePasswordForm();
   const { register, formState: { errors } } = form;
 
@@ -13,13 +15,13 @@ function PasswordPage() {
     <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={LockIcon}
-        title="Password"
-        description="Update your password to keep your account secure"
+        title={t('password.title')}
+        description={t('password.description')}
       />
 
       <form onSubmit={onSubmit} className="max-w-md space-y-6">
         <FormField
-          label="Current password"
+          label={t('password.current')}
           htmlFor="pwd-current"
           error={errors.currentPassword?.message}
         >
@@ -32,10 +34,10 @@ function PasswordPage() {
         </FormField>
 
         <FormField
-          label="New password"
+          label={t('password.new')}
           htmlFor="pwd-new"
           error={errors.newPassword?.message}
-          hint="At least 12 characters with uppercase, lowercase and a number"
+          hint={t('password.hint')}
         >
           <Input
             id="pwd-new"
@@ -46,7 +48,7 @@ function PasswordPage() {
         </FormField>
 
         <FormField
-          label="Confirm new password"
+          label={t('password.confirm')}
           htmlFor="pwd-confirm"
           error={errors.confirmPassword?.message}
         >
@@ -64,7 +66,7 @@ function PasswordPage() {
           className="rounded-full px-8 font-semibold"
           disabled={isSubmitting}
         >
-          {isSubmitting ? 'Updating…' : 'Update password'}
+          {isSubmitting ? t('password.updating') : t('password.update')}
         </Button>
       </form>
     </div>

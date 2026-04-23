@@ -4,6 +4,7 @@ import { cn } from '@gsrosa/atlas-ui';
 import { CreditCardIcon, LockIcon, MenuIcon, SlidersHorizontalIcon, UserIcon } from 'lucide-react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Toaster } from 'sonner';
+import { useTranslation } from 'react-i18next';
 
 import { TrpcProvider } from '@/providers/trpc-provider';
 
@@ -11,11 +12,11 @@ import { AccountShell } from '@/features/users/components/account-shell';
 
 // ─── Sidebar items ────────────────────────────────────────────────────────────
 
-const NAV_ITEMS = [
-  { to: '/profile/about', label: 'Profile', icon: UserIcon },
-  { to: '/profile/password', label: 'Password', icon: LockIcon },
-  { to: '/profile/billing', label: 'Billing', icon: CreditCardIcon },
-  { to: '/profile/preferences', label: 'Preferences', icon: SlidersHorizontalIcon },
+const NAV_ITEM_DEFS = [
+  { to: '/profile/about', key: 'nav.profile', icon: UserIcon },
+  { to: '/profile/password', key: 'nav.password', icon: LockIcon },
+  { to: '/profile/billing', key: 'nav.billing', icon: CreditCardIcon },
+  { to: '/profile/preferences', key: 'nav.preferences', icon: SlidersHorizontalIcon },
 ] as const;
 
 const navLinkClass = ({ isActive }: { isActive: boolean }) =>
@@ -29,16 +30,17 @@ const navLinkClass = ({ isActive }: { isActive: boolean }) =>
 // ─── Sidebar ──────────────────────────────────────────────────────────────────
 
 function ProfileSidebar({ onNavigate }: { onNavigate?: () => void }) {
+  const { t } = useTranslation('profile');
   return (
     <aside className="flex min-h-0 w-full flex-1 flex-col overflow-y-auto px-3 py-5 md:h-full md:px-4 md:py-6">
       <p className="mb-3 px-2 text-xs font-medium uppercase tracking-[0.15em] text-neutral-400">
-        Account
+        {t('nav.account')}
       </p>
       <nav className="flex flex-col gap-1" aria-label="Account sections">
-        {NAV_ITEMS.map((item) => (
+        {NAV_ITEM_DEFS.map((item) => (
           <NavLink key={item.to} to={item.to} className={navLinkClass} onClick={onNavigate}>
             <item.icon className="size-4 shrink-0" aria-hidden />
-            {item.label}
+            {t(item.key)}
           </NavLink>
         ))}
       </nav>
@@ -49,8 +51,9 @@ function ProfileSidebar({ onNavigate }: { onNavigate?: () => void }) {
 // ─── Mobile bar ───────────────────────────────────────────────────────────────
 
 function ProfileMobileBar({ onOpenNav }: { onOpenNav: () => void }) {
+  const { t } = useTranslation('profile');
   const { pathname } = useLocation();
-  const current = NAV_ITEMS.find((item) => pathname.startsWith(item.to));
+  const current = NAV_ITEM_DEFS.find((item) => pathname.startsWith(item.to));
 
   return (
     <div className="flex shrink-0 items-center gap-3 border-b border-neutral-700 bg-neutral-800 px-3 py-3 md:hidden">
@@ -58,14 +61,14 @@ function ProfileMobileBar({ onOpenNav }: { onOpenNav: () => void }) {
         type="button"
         onClick={onOpenNav}
         className="flex size-10 shrink-0 items-center justify-center rounded-[var(--atlas-radius-md)] text-neutral-100 ring-1 ring-neutral-700 transition-colors hover:bg-neutral-700"
-        aria-label="Open account menu"
+        aria-label={t('nav.openMenu')}
       >
         <MenuIcon className="size-5" aria-hidden />
       </button>
       <div className="min-w-0 flex-1 text-center">
-        <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">Account</p>
+        <p className="text-xs font-medium uppercase tracking-wider text-neutral-400">{t('nav.account')}</p>
         <p className="truncate text-sm font-semibold text-neutral-100">
-          {current?.label ?? 'Profile'}
+          {current ? t(current.key) : t('nav.profile')}
         </p>
       </div>
       <div className="size-10 shrink-0" aria-hidden />
@@ -76,6 +79,7 @@ function ProfileMobileBar({ onOpenNav }: { onOpenNav: () => void }) {
 // ─── Layout ───────────────────────────────────────────────────────────────────
 
 function ProfileLayoutInner() {
+  const { t } = useTranslation('profile');
   const [navOpen, setNavOpen] = React.useState(false);
 
   return (
@@ -89,7 +93,7 @@ function ProfileLayoutInner() {
               <button
                 type="button"
                 className="fixed inset-0 z-40 bg-black/55 backdrop-blur-[2px] md:hidden"
-                aria-label="Close menu"
+                aria-label={t('nav.closeMenu')}
                 onClick={() => setNavOpen(false)}
               />
             )}

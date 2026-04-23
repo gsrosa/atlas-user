@@ -1,5 +1,6 @@
 import { AtlasProvider } from '@gsrosa/atlas-ui';
 import '@/styles/standalone.css';
+import '@/lib/i18n';
 import React from 'react';
 import { createRoot } from 'react-dom/client';
 

@@ -10,21 +10,23 @@ import {
 } from '@gsrosa/atlas-ui';
 import { UserIcon } from 'lucide-react';
 import { Controller } from 'react-hook-form';
+import { useTranslation } from 'react-i18next';
 
 import { AccountSectionHeader } from '@/features/users/components/account-section-header';
 import { FormField } from '@/features/users/components/form-field';
 import { useProfileForm } from '@/features/users/hooks/use-profile-form';
 
-const GENDER_OPTIONS = [
-  { value: 'male', label: 'Male' },
-  { value: 'female', label: 'Female' },
-  { value: 'other', label: 'Other' },
-  { value: 'prefer_not_to_say', label: 'Prefer not to say' },
-] as const;
-
 function ProfilePage() {
+  const { t } = useTranslation('profile');
   const { form, profile, isLoadingProfile, isSubmitting, onSubmit } = useProfileForm();
   const { register, control, formState: { errors } } = form;
+
+  const GENDER_OPTIONS = [
+    { value: 'male', label: t('gender.male') },
+    { value: 'female', label: t('gender.female') },
+    { value: 'other', label: t('gender.other') },
+    { value: 'prefer_not_to_say', label: t('gender.preferNot') },
+  ] as const;
 
   const firstName = form.watch('first_name');
   const lastName = form.watch('last_name');
@@ -40,8 +42,8 @@ function ProfilePage() {
     <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={UserIcon}
-        title="Profile"
-        description="Manage your personal information"
+        title={t('section.about')}
+        description={t('about.description')}
       />
 
       <div className="flex items-center gap-5">
@@ -72,14 +74,14 @@ function ProfilePage() {
 
       <form onSubmit={onSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <FormField label="First name" htmlFor="first-name" error={errors.first_name?.message}>
+          <FormField label={t('about.firstName')} htmlFor="first-name" error={errors.first_name?.message}>
             <Input
               id="first-name"
               disabled={isLoadingProfile}
               {...register('first_name')}
             />
           </FormField>
-          <FormField label="Last name" htmlFor="last-name" error={errors.last_name?.message}>
+          <FormField label={t('about.lastName')} htmlFor="last-name" error={errors.last_name?.message}>
             <Input
               id="last-name"
               disabled={isLoadingProfile}
@@ -88,7 +90,7 @@ function ProfilePage() {
           </FormField>
         </div>
 
-        <FormField label="Email" htmlFor="email">
+        <FormField label={t('about.email')} htmlFor="email">
           <Input
             id="email"
             value={profile?.email ?? ''}
@@ -99,7 +101,7 @@ function ProfilePage() {
         </FormField>
 
         <FormField
-          label="Avatar URL"
+          label={t('about.avatarUrl')}
           htmlFor="avatar-url"
           error={errors.avatar_url?.message}
         >
@@ -112,7 +114,7 @@ function ProfilePage() {
         </FormField>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <FormField label="Gender" htmlFor="gender" error={errors.gender?.message}>
+          <FormField label={t('about.gender')} htmlFor="gender" error={errors.gender?.message}>
             <Controller
               control={control}
               name="gender"
@@ -125,7 +127,7 @@ function ProfilePage() {
                   disabled={isLoadingProfile}
                 >
                   <SelectTrigger id="gender">
-                    <SelectValue placeholder="Select gender" />
+                    <SelectValue placeholder={t('about.genderPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
                     {GENDER_OPTIONS.map((o) => (
@@ -139,7 +141,7 @@ function ProfilePage() {
             />
           </FormField>
 
-          <FormField label="Phone" htmlFor="phone" error={errors.phone?.message}>
+          <FormField label={t('about.phone')} htmlFor="phone" error={errors.phone?.message}>
             <Input
               id="phone"
               type="tel"
@@ -151,10 +153,10 @@ function ProfilePage() {
         </div>
 
         <FormField
-          label="Country"
+          label={t('about.country')}
           htmlFor="country"
           error={errors.country?.message}
-          hint="2-letter ISO code (e.g. US, BR, PT)"
+          hint={t('about.countryHint')}
         >
           <Input
             id="country"
@@ -165,7 +167,7 @@ function ProfilePage() {
           />
         </FormField>
 
-        <FormField label="Bio" htmlFor="bio" error={errors.bio?.message}>
+        <FormField label={t('about.bio')} htmlFor="bio" error={errors.bio?.message}>
           <Textarea
             id="bio"
             rows={3}
@@ -181,7 +183,7 @@ function ProfilePage() {
           className="rounded-full px-8 font-semibold"
           disabled={isSubmitting || isLoadingProfile}
         >
-          {isSubmitting ? 'Saving…' : 'Save changes'}
+          {isSubmitting ? t('about.saving') : t('about.save')}
         </Button>
       </form>
     </div>

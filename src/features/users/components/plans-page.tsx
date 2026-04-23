@@ -1,5 +1,6 @@
 import { CalendarIcon, ChevronRightIcon, MapIcon, MapPinIcon, PlusIcon } from 'lucide-react';
 import { Button } from '@gsrosa/atlas-ui';
+import { useTranslation } from 'react-i18next';
 
 import { trpc } from '@/lib/trpc';
 
@@ -15,6 +16,7 @@ function formatDate(dateStr: string | null | undefined): string {
 }
 
 export function PlansPage() {
+  const { t } = useTranslation('profile');
   const { data, isLoading, error } = trpc.plans.list.useQuery({ limit: 50 });
   const plans = data?.plans;
 
@@ -30,8 +32,8 @@ export function PlansPage() {
     <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={MapIcon}
-        title="My plans"
-        description="Your generated travel itineraries"
+        title={t('plans.title')}
+        description={t('plans.description')}
         action={
           <Button
             type="button"
@@ -40,7 +42,7 @@ export function PlansPage() {
             onClick={handleNewPlan}
           >
             <PlusIcon className="size-4" aria-hidden />
-            New plan
+            {t('plans.newPlan')}
           </Button>
         }
       />
@@ -57,7 +59,7 @@ export function PlansPage() {
       )}
 
       {error && (
-        <p className="text-sm text-red-500">Failed to load plans. Please try again.</p>
+        <p className="text-sm text-red-500">{t('plans.loadFailed')}</p>
       )}
 
       {!isLoading && !error && plans?.length === 0 && (
@@ -67,15 +69,13 @@ export function PlansPage() {
             strokeWidth={1.25}
             aria-hidden
           />
-          <p className="text-sm text-neutral-400">
-            No plans yet. Generate your first trip!
-          </p>
+          <p className="text-sm text-neutral-400">{t('plans.empty')}</p>
           <button
             type="button"
             onClick={handleNewPlan}
             className="text-sm font-medium text-primary-400 hover:underline"
           >
-            Plan a trip →
+            {t('plans.planATrip')}
           </button>
         </div>
       )}
@@ -84,7 +84,7 @@ export function PlansPage() {
         <ul className="space-y-3">
           {plans.map((plan) => {
             const displayName =
-              plan.title ?? plan.ai_suggested_title ?? plan.destination ?? 'Untitled trip';
+              plan.title ?? plan.ai_suggested_title ?? plan.destination ?? t('plans.untitledTrip');
             const subtitle = plan.title && plan.destination ? plan.destination : null;
 
             return (
@@ -116,7 +116,7 @@ export function PlansPage() {
                         )}
                         {plan.days_count && (
                           <span className="text-xs text-neutral-400">
-                            {plan.days_count} days
+                            {t('plans.days', { count: plan.days_count })}
                           </span>
                         )}
                       </div>
