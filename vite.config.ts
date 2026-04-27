@@ -20,7 +20,7 @@ export default defineConfig({
         './ProfilePreferencesPage': './src/features/users/components/preferences-page.tsx',
       },
       shared: {
-        '@gsrosa/atlas-ui': { singleton: true, requiredVersion: false as const },
+        '@gsrosa/nexploring-ui': { singleton: true, requiredVersion: false as const },
         react: { singleton: true, requiredVersion: '^19.0.0' },
         'react-dom': { singleton: true, requiredVersion: '^19.0.0' },
         'react-router-dom': { singleton: true, requiredVersion: '^7.0.0' },
@@ -54,7 +54,7 @@ export default defineConfig({
   },
   optimizeDeps: {
     exclude: [
-      '@gsrosa/atlas-ui',
+      '@gsrosa/nexploring-ui',
       'react',
       'react-dom',
       'react-router-dom',

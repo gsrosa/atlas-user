@@ -1,4 +1,4 @@
-import { Button, Input } from '@gsrosa/atlas-ui';
+import { Button, Input } from '@gsrosa/nexploring-ui';
 import { LockIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 

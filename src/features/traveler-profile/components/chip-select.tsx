@@ -1,4 +1,4 @@
-import { cn } from "@gsrosa/atlas-ui"
+import { cn } from "@gsrosa/nexploring-ui"
 import { CheckIcon } from "lucide-react"
 
 import type { ProfileOption } from "@/features/traveler-profile/shared/types"

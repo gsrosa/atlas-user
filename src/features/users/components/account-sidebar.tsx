@@ -1,4 +1,4 @@
-import { cn } from '@gsrosa/atlas-ui';
+import { cn } from '@gsrosa/nexploring-ui';
 import { CreditCardIcon, LockIcon, MenuIcon, SlidersHorizontalIcon, UserIcon } from 'lucide-react';
 
 import type { AccountSectionId } from '@/features/users/account-section';

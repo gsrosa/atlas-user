@@ -1,6 +1,6 @@
 import React from "react";
 
-import { Button, cn } from "@gsrosa/atlas-ui";
+import { Button, cn } from "@gsrosa/nexploring-ui";
 import { Controller } from "react-hook-form";
 import { ChevronRightIcon } from "lucide-react";
 

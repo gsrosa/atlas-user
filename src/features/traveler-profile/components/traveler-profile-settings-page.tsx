@@ -1,5 +1,5 @@
 import { PencilIcon } from "lucide-react";
-import { Button, cn } from "@gsrosa/atlas-ui";
+import { Button, cn } from "@gsrosa/nexploring-ui";
 
 import { trpc } from "@/lib/trpc";
 

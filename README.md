@@ -7,7 +7,7 @@ User account microfrontend for the Atlas shell. Exposes `App` via Module Federat
 - Vite 6 + React 19 + TypeScript (same as `atlas-ai-assistant`)
 - Module Federation (`@originjs/vite-plugin-federation`), remote name `userApp`
 - Tailwind CSS v4 (`@tailwindcss/vite`)
-- `@gsrosa/atlas-ui` + dark `AtlasProvider` (matches the AI Assistant remote)
+- `@gsrosa/nexploring-ui` + dark `NexploringProvider` (matches the AI Assistant remote)
 - TanStack Query + tRPC client (`atlas-bff` types) calling `users.me` / `users.updateMe`
 - Supabase JS auth in the browser; access token is sent to the BFF as `Authorization: Bearer …`
 

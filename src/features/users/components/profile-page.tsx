@@ -7,7 +7,7 @@ import {
   SelectTrigger,
   SelectValue,
   Textarea,
-} from '@gsrosa/atlas-ui';
+} from '@gsrosa/nexploring-ui';
 import { UserIcon } from 'lucide-react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';

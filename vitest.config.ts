@@ -15,7 +15,7 @@ export default defineConfig({
     },
   },
   optimizeDeps: {
-    exclude: ['@gsrosa/atlas-ui'],
+    exclude: ['@gsrosa/nexploring-ui'],
   },
   test: {
     environment: 'jsdom',

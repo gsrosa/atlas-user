@@ -70,7 +70,7 @@ module.exports = (env, argv) => {
             strictVersion: false,
             eager: false,
           },
-          '@gsrosa/atlas-ui': {
+          '@gsrosa/nexploring-ui': {
             singleton: true,
             requiredVersion: false,
             strictVersion: false,

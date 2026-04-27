@@ -1,6 +1,7 @@
 import i18n from 'i18next';
-import HttpBackend from 'i18next-http-backend';
 import { initReactI18next } from 'react-i18next';
+
+import { userI18nResources } from '@/lib/i18n-resources';
 
 const LOCALE_COOKIE = 'atlas-lang';
 const SUPPORTED = ['en-US', 'pt-BR', 'es-ES'] as const;
@@ -23,25 +24,27 @@ function getPersistedLocale(): SupportedLocale {
   return 'en-US';
 }
 
-i18n
-  .use(HttpBackend)
-  .use(initReactI18next)
-  .init({
+if (!i18n.isInitialized) {
+  void i18n.use(initReactI18next).init({
+    resources: userI18nResources,
     lng: getPersistedLocale(),
     fallbackLng: 'en-US',
-    supportedLngs: SUPPORTED,
+    supportedLngs: [...SUPPORTED],
     ns: ['profile'],
     defaultNS: 'profile',
-    backend: { loadPath: `${__webpack_public_path__}locales/{{lng}}/{{ns}}.json` },
+    react: { useSuspense: false },
     interpolation: { escapeValue: false },
   });
+}
 
-// React immediately to locale changes dispatched by the shell LocaleSwitcher
-window.addEventListener('atlas:locale-changed', (e) => {
-  const locale = (e as CustomEvent<{ locale: string }>).detail.locale;
-  if ((SUPPORTED as readonly string[]).includes(locale)) {
-    void i18n.changeLanguage(locale);
-  }
-});
+if (typeof window !== 'undefined' && !(window as { __atlasUserLocaleBound?: boolean }).__atlasUserLocaleBound) {
+  (window as { __atlasUserLocaleBound?: boolean }).__atlasUserLocaleBound = true;
+  window.addEventListener('atlas:locale-changed', (e) => {
+    const locale = (e as CustomEvent<{ locale: string }>).detail.locale;
+    if ((SUPPORTED as readonly string[]).includes(locale)) {
+      void i18n.changeLanguage(locale);
+    }
+  });
+}
 
 export default i18n;

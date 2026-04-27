@@ -1,5 +1,5 @@
 import { CalendarIcon, ChevronRightIcon, MapIcon, MapPinIcon, PlusIcon } from 'lucide-react';
-import { Button } from '@gsrosa/atlas-ui';
+import { Button } from '@gsrosa/nexploring-ui';
 import { useTranslation } from 'react-i18next';
 
 import { trpc } from '@/lib/trpc';

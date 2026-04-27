@@ -1,10 +1,10 @@
 /* Standalone dev: base tokens + @theme + Tailwind — single compilation. */
-@import "@gsrosa/atlas-ui/styles/base";
-@import "@gsrosa/atlas-ui/theme";
+@import "@gsrosa/nexploring-ui/styles/base";
+@import "@gsrosa/nexploring-ui/theme";
 @import "tailwindcss";
 
 @source "../**/*.{js,ts,jsx,tsx}";
-@source "../../node_modules/@gsrosa/atlas-ui/src/**/*.{js,ts,jsx,tsx}";
+@source "../../node_modules/@gsrosa/nexploring-ui/src/**/*.{js,ts,jsx,tsx}";
 
 @theme {
   --animate-account-fade-in-up: account-fade-in-up 0.45s ease both;

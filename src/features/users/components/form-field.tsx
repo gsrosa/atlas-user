@@ -1,4 +1,4 @@
-import { Label, cn } from '@gsrosa/atlas-ui';
+import { Label, cn } from '@gsrosa/nexploring-ui';
 import type { ReactNode } from 'react';
 
 type FormFieldProps = {

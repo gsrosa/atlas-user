@@ -1,4 +1,4 @@
-import { cn } from '@gsrosa/atlas-ui';
+import { cn } from '@gsrosa/nexploring-ui';
 import type { ReactNode } from 'react';
 
 type AccountShellProps = {

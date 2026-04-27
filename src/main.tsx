@@ -1,4 +1,4 @@
-import { AtlasProvider } from '@gsrosa/atlas-ui';
+import { NexploringProvider } from '@gsrosa/nexploring-ui';
 import '@/styles/standalone.css';
 import '@/lib/i18n';
 import React from 'react';
@@ -14,7 +14,7 @@ if (root) {
 
   createRoot(root).render(
     <React.StrictMode>
-      <AtlasProvider defaultMode="dark">{appTree}</AtlasProvider>
+      <NexploringProvider defaultMode="dark">{appTree}</NexploringProvider>
     </React.StrictMode>,
   );
 }

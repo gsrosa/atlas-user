@@ -2,7 +2,11 @@ import React from 'react';
 
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import { beforeEach, describe, expect, it, vi } from 'vitest';
+import i18next from 'i18next';
+import { I18nextProvider, initReactI18next } from 'react-i18next';
+import { beforeAll, beforeEach, describe, expect, it, vi } from 'vitest';
+
+import profileEn from '@/locales/en-US/profile.json';
 
 // ── Mocks ──────────────────────────────────────────────────────────────────
 
@@ -15,8 +19,8 @@ vi.mock('@/lib/trpc', () => ({
   },
 }));
 
-vi.mock('@gsrosa/atlas-ui', async (importOriginal) => {
-  const actual = await importOriginal<typeof import('@gsrosa/atlas-ui')>();
+vi.mock('@gsrosa/nexploring-ui', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('@gsrosa/nexploring-ui')>();
   return {
     ...actual,
     Button: ({ children, onClick, disabled, ...props }: React.ComponentProps<'button'>) => (
@@ -38,6 +42,30 @@ import { PaymentsPage } from '../components/payments-page';
 
 const mockBalance = trpc.credits.balance.useQuery as ReturnType<typeof vi.fn>;
 const mockList = trpc.credits.list.useQuery as ReturnType<typeof vi.fn>;
+
+const testI18n = i18next.createInstance();
+
+beforeAll(async () => {
+  await testI18n.use(initReactI18next).init({
+    lng: 'en-US',
+    fallbackLng: 'en-US',
+    ns: ['profile'],
+    defaultNS: 'profile',
+    resources: {
+      'en-US': {
+        profile: profileEn as Record<string, unknown>,
+      },
+    },
+    interpolation: { escapeValue: false },
+  });
+});
+
+const renderPayments = () =>
+  render(
+    <I18nextProvider i18n={testI18n}>
+      <PaymentsPage />
+    </I18nextProvider>,
+  );
 
 const makeTx = (id: string, amount: number, reason = 'plan_generated') => ({
   id,
@@ -65,31 +93,31 @@ describe('PaymentsPage', () => {
 
   it('renders the available credit balance', () => {
     mockBalance.mockReturnValue({ data: { balance: 42 }, isLoading: false, error: null });
-    render(<PaymentsPage />);
+    renderPayments();
     expect(screen.getByText('42')).toBeInTheDocument();
   });
 
   it('shows loading skeleton for balance', () => {
     mockBalance.mockReturnValue({ data: undefined, isLoading: true, error: null });
-    render(<PaymentsPage />);
+    renderPayments();
     // skeleton element is present; exact text is absent
     expect(screen.queryByText('12')).not.toBeInTheDocument();
   });
 
   it('shows loading skeleton for transaction list', () => {
     mockList.mockReturnValue({ data: undefined, isLoading: true, error: null });
-    render(<PaymentsPage />);
+    renderPayments();
     expect(screen.getAllByRole('listitem').length).toBeGreaterThan(0);
   });
 
   it('shows error message when list query fails', () => {
     mockList.mockReturnValue({ data: undefined, isLoading: false, error: new Error('fail') });
-    render(<PaymentsPage />);
+    renderPayments();
     expect(screen.getByText(/failed to load transactions/i)).toBeInTheDocument();
   });
 
   it('shows empty state when there are no transactions', () => {
-    render(<PaymentsPage />);
+    renderPayments();
     expect(screen.getByText(/no transactions yet/i)).toBeInTheDocument();
   });
 
@@ -104,7 +132,7 @@ describe('PaymentsPage', () => {
       isLoading: false,
       error: null,
     });
-    render(<PaymentsPage />);
+    renderPayments();
     expect(screen.getByText('Plan Generated')).toBeInTheDocument();
     expect(screen.getByText('Manual Topup')).toBeInTheDocument();
     expect(screen.getByText('-5 credits')).toBeInTheDocument();
@@ -117,7 +145,7 @@ describe('PaymentsPage', () => {
       isLoading: false,
       error: null,
     });
-    render(<PaymentsPage />);
+    renderPayments();
     expect(screen.getByRole('button', { name: /previous page/i })).toBeDisabled();
     expect(screen.getByRole('button', { name: /next page/i })).toBeDisabled();
     expect(screen.getByText('Page 1 of 1')).toBeInTheDocument();
@@ -134,7 +162,7 @@ describe('PaymentsPage', () => {
       isLoading: false,
       error: null,
     });
-    render(<PaymentsPage />);
+    renderPayments();
     expect(screen.getByRole('button', { name: /previous page/i })).toBeDisabled();
     expect(screen.getByRole('button', { name: /next page/i })).not.toBeDisabled();
     expect(screen.getByText('Page 1 of 3')).toBeInTheDocument();
@@ -152,7 +180,7 @@ describe('PaymentsPage', () => {
       isLoading: false,
       error: null,
     });
-    render(<PaymentsPage />);
+    renderPayments();
 
     await user.click(screen.getByRole('button', { name: /next page/i }));
 
@@ -175,7 +203,7 @@ describe('PaymentsPage', () => {
       isLoading: false,
       error: null,
     });
-    render(<PaymentsPage />);
+    renderPayments();
 
     await user.click(screen.getByRole('button', { name: /next page/i }));
     await user.click(screen.getByRole('button', { name: /previous page/i }));
