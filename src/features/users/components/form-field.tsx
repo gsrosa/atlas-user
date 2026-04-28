@@ -1,4 +1,4 @@
-import { Label, cn } from '@gsrosa/nexploring-ui';
+import { cn,Label } from '@gsrosa/nexploring-ui';
 import type { ReactNode } from 'react';
 
 type FormFieldProps = {

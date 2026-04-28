@@ -1,6 +1,5 @@
-import React from 'react';
-
 import { render, screen, waitFor } from '@testing-library/react';
+import type React from 'react';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { App } from '@/App';

@@ -1,27 +1,33 @@
-import { CalendarIcon, ChevronRightIcon, MapIcon, MapPinIcon, PlusIcon } from 'lucide-react';
-import { Button } from '@gsrosa/nexploring-ui';
-import { useTranslation } from 'react-i18next';
+import { Button } from "@gsrosa/nexploring-ui";
+import {
+  CalendarIcon,
+  ChevronRightIcon,
+  MapIcon,
+  MapPinIcon,
+  PlusIcon,
+} from "lucide-react";
+import { useTranslation } from "react-i18next";
 
-import { trpc } from '@/lib/trpc';
+import { AccountSectionHeader } from "@/features/users/components/account-section-header";
 
-import { AccountSectionHeader } from '@/features/users/components/account-section-header';
+import { trpc } from "@/trpc/client";
 
 function formatDate(dateStr: string | null | undefined): string {
-  if (!dateStr) return '—';
-  return new Date(dateStr).toLocaleDateString('en-US', {
-    month: 'short',
-    day: 'numeric',
-    year: 'numeric',
+  if (!dateStr) return "—";
+  return new Date(dateStr).toLocaleDateString("en-US", {
+    month: "short",
+    day: "numeric",
+    year: "numeric",
   });
 }
 
 export function PlansPage() {
-  const { t } = useTranslation('profile');
+  const { t } = useTranslation("profile");
   const { data, isLoading, error } = trpc.plans.list.useQuery({ limit: 50 });
   const plans = data?.plans;
 
   function handleNewPlan() {
-    window.location.assign('/assistant');
+    window.location.assign("/assistant");
   }
 
   function handleOpenPlan(id: string) {
@@ -32,8 +38,8 @@ export function PlansPage() {
     <div className="animate-account-fade-in-up space-y-10">
       <AccountSectionHeader
         icon={MapIcon}
-        title={t('plans.title')}
-        description={t('plans.description')}
+        title={t("plans.title")}
+        description={t("plans.description")}
         action={
           <Button
             type="button"
@@ -42,7 +48,7 @@ export function PlansPage() {
             onClick={handleNewPlan}
           >
             <PlusIcon className="size-4" aria-hidden />
-            {t('plans.newPlan')}
+            {t("plans.newPlan")}
           </Button>
         }
       />
@@ -58,9 +64,7 @@ export function PlansPage() {
         </ul>
       )}
 
-      {error && (
-        <p className="text-sm text-red-500">{t('plans.loadFailed')}</p>
-      )}
+      {error && <p className="text-sm text-red-500">{t("plans.loadFailed")}</p>}
 
       {!isLoading && !error && plans?.length === 0 && (
         <div className="flex flex-col items-center gap-3 py-12 text-center">
@@ -69,13 +73,13 @@ export function PlansPage() {
             strokeWidth={1.25}
             aria-hidden
           />
-          <p className="text-sm text-neutral-400">{t('plans.empty')}</p>
+          <p className="text-sm text-neutral-400">{t("plans.empty")}</p>
           <button
             type="button"
             onClick={handleNewPlan}
             className="text-sm font-medium text-primary-400 hover:underline"
           >
-            {t('plans.planATrip')}
+            {t("plans.planATrip")}
           </button>
         </div>
       )}
@@ -84,8 +88,12 @@ export function PlansPage() {
         <ul className="space-y-3">
           {plans.map((plan) => {
             const displayName =
-              plan.title ?? plan.ai_suggested_title ?? plan.destination ?? t('plans.untitledTrip');
-            const subtitle = plan.title && plan.destination ? plan.destination : null;
+              plan.title ??
+              plan.ai_suggested_title ??
+              plan.destination ??
+              t("plans.untitledTrip");
+            const subtitle =
+              plan.title && plan.destination ? plan.destination : null;
 
             return (
               <li key={plan.id}>
@@ -96,7 +104,11 @@ export function PlansPage() {
                 >
                   <div className="flex min-w-0 items-center gap-4">
                     <div className="flex size-11 shrink-0 items-center justify-center rounded-xl bg-gradient-to-br from-primary-300 to-primary-500 text-neutral-700 shadow-[var(--atlas-shadow-sm)]">
-                      <MapPinIcon className="size-5" strokeWidth={1.75} aria-hidden />
+                      <MapPinIcon
+                        className="size-5"
+                        strokeWidth={1.75}
+                        aria-hidden
+                      />
                     </div>
                     <div className="min-w-0">
                       <p className="truncate font-medium text-neutral-100">
@@ -110,13 +122,16 @@ export function PlansPage() {
                         )}
                         {plan.departure_at && (
                           <span className="flex items-center gap-1 text-xs text-neutral-400">
-                            <CalendarIcon className="size-3 shrink-0" aria-hidden />
+                            <CalendarIcon
+                              className="size-3 shrink-0"
+                              aria-hidden
+                            />
                             {formatDate(plan.departure_at)}
                           </span>
                         )}
                         {plan.days_count && (
                           <span className="text-xs text-neutral-400">
-                            {t('plans.days', { count: plan.days_count })}
+                            {t("plans.days", { count: plan.days_count })}
                           </span>
                         )}
                       </div>

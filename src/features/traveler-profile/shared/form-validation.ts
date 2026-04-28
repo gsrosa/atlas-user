@@ -1,5 +1,5 @@
-import type { ProfileQuestion } from "./types"
 import type { TravelerProfileFormValues } from "./schema"
+import type { ProfileQuestion } from "./types"
 
 export const canProceedSection = (
   steps: Pick<ProfileQuestion, "field" | "type">[],

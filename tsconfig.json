@@ -19,10 +19,14 @@
     "types": ["@testing-library/jest-dom"],
     "baseUrl": ".",
     "paths": {
-      "@/*": ["./src/*"],
-      "atlas-bff/trpc": ["../atlas-bff/types-generated/trpc/export-types.d.ts"]
+      "@/*": ["./src/*"]
     }
   },
-  "include": ["src"],
-  "exclude": ["src/**/__tests__", "src/**/*.test.ts", "src/**/*.test.tsx"]
+  "include": [
+    "src",
+    "**/*.test.ts",
+    "**/*.test.tsx",
+    "**/*.spec.ts",
+    "**/*.spec.tsx"
+  ]
 }

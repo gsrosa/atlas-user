@@ -34,7 +34,7 @@
   "password.current": "Current password",
   "password.new": "New password",
   "password.confirm": "Confirm new password",
-  "password.hint": "At least 12 characters with uppercase, lowercase and a number",
+  "password.hint": "At least 8 characters with uppercase, lowercase and a number",
   "password.update": "Update password",
   "password.updating": "Updating…",
   "preferences.title": "Travel preferences",

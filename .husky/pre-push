@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+if pnpm run | rg -q "generate:trpc"; then
+  pnpm generate:trpc
+else
+  echo "✅ No generate:trpc script configured"
+fi

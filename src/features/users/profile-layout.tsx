@@ -2,14 +2,15 @@ import React from 'react';
 
 import { cn } from '@gsrosa/nexploring-ui';
 import { CreditCardIcon, LockIcon, MenuIcon, SlidersHorizontalIcon, UserIcon } from 'lucide-react';
+import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import { Toaster } from 'sonner';
-import { useTranslation } from 'react-i18next';
-
-import '@/lib/i18n';
-import { TrpcProvider } from '@/providers/trpc-provider';
 
 import { AccountShell } from '@/features/users/components/account-shell';
+
+import { TrpcProvider } from '@/providers/trpc-provider';
+
+import '@/lib/i18n';
 
 // ─── Sidebar items ────────────────────────────────────────────────────────────
 

@@ -3,8 +3,8 @@ import React from 'react';
 import { cn } from '@gsrosa/nexploring-ui';
 
 import { ACCOUNT_SECTION_LABELS, type AccountSectionId } from '@/features/users/account-section';
-import { AccountMobileBar, AccountSidebar } from '@/features/users/components/account-sidebar';
 import { AccountShell } from '@/features/users/components/account-shell';
+import { AccountMobileBar, AccountSidebar } from '@/features/users/components/account-sidebar';
 import { PasswordPage } from '@/features/users/components/password-page';
 import { PaymentsPage } from '@/features/users/components/payments-page';
 import { PreferencesPage } from '@/features/users/components/preferences-page';

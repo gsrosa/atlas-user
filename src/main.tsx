@@ -1,11 +1,13 @@
-import { NexploringProvider } from '@gsrosa/nexploring-ui';
-import '@/styles/standalone.css';
-import '@/lib/i18n';
 import React from 'react';
+
+import { NexploringProvider } from '@gsrosa/nexploring-ui';
 import { createRoot } from 'react-dom/client';
 
 import { App } from '@/App';
 import { PlaywrightRoot } from '@/playwright-root';
+
+import '@/styles/standalone.css';
+import '@/lib/i18n';
 
 const root = document.getElementById('root');
 if (root) {

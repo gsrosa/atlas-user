@@ -3,7 +3,7 @@ import { initReactI18next } from 'react-i18next';
 
 import { userI18nResources } from '@/lib/i18n-resources';
 
-const LOCALE_COOKIE = 'atlas-lang';
+const LOCALE_COOKIE = 'nexploring-lang';
 const SUPPORTED = ['en-US', 'pt-BR', 'es-ES'] as const;
 export type SupportedLocale = (typeof SUPPORTED)[number];
 
@@ -37,9 +37,9 @@ if (!i18n.isInitialized) {
   });
 }
 
-if (typeof window !== 'undefined' && !(window as { __atlasUserLocaleBound?: boolean }).__atlasUserLocaleBound) {
-  (window as { __atlasUserLocaleBound?: boolean }).__atlasUserLocaleBound = true;
-  window.addEventListener('atlas:locale-changed', (e) => {
+if (typeof window !== 'undefined' && !(window as { __nexploringUserLocaleBound?: boolean }).__nexploringUserLocaleBound) {
+  (window as { __nexploringUserLocaleBound?: boolean }).__nexploringUserLocaleBound = true;
+  window.addEventListener('nexploring:locale-changed', (e) => {
     const locale = (e as CustomEvent<{ locale: string }>).detail.locale;
     if ((SUPPORTED as readonly string[]).includes(locale)) {
       void i18n.changeLanguage(locale);

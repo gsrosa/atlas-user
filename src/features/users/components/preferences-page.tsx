@@ -7,8 +7,8 @@ function PreferencesPage() {
 
   React.useEffect(() => {
     const done = () => setIsEditing(false);
-    window.addEventListener('atlas:traveler-profile-updated', done);
-    return () => window.removeEventListener('atlas:traveler-profile-updated', done);
+    window.addEventListener('nexploring:traveler-profile-updated', done);
+    return () => window.removeEventListener('nexploring:traveler-profile-updated', done);
   }, []);
 
   if (isEditing) return <TravelerProfileFormPage />;

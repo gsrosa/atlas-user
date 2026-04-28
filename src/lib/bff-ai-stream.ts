@@ -7,10 +7,6 @@ interface BffAiStreamOptions {
   responseMimeType?: 'text/plain' | 'application/json';
 }
 
-/**
- * Calls the BFF SSE streaming endpoint (`POST /plans/stream`) and accumulates
- * all text deltas into a single string. Auth is forwarded via the session cookie.
- */
 export async function callBffAiStream(
   userPrompt: string,
   options: BffAiStreamOptions = {},

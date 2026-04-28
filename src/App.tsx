@@ -4,6 +4,7 @@ import { Toaster } from 'sonner';
 
 import { TravelerProfileFormPage } from '@/features/traveler-profile';
 import { AccountLayout } from '@/features/users';
+
 import { TrpcProvider } from '@/providers/trpc-provider';
 
 // ─── MFE root — exposed to the shell via Module Federation ────────────────────

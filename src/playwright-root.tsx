@@ -1,12 +1,14 @@
 import React from 'react';
+
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
 import { TravelerProfileFormPage } from '@/features/traveler-profile';
 import { AccountLayout } from '@/features/users';
 import { PasswordPage } from '@/features/users/components/password-page';
-import { ProfilePage } from '@/features/users/components/profile-page';
 import PreferencesPage from '@/features/users/components/preferences-page';
+import { ProfilePage } from '@/features/users/components/profile-page';
 import ProfileLayout from '@/features/users/profile-layout';
+
 import { TrpcProvider } from '@/providers/trpc-provider';
 
 /**

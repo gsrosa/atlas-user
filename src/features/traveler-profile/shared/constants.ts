@@ -1,7 +1,7 @@
 /** Traveler profile — field keys and options must match nexploring-bff `traveler-profile` Zod enums. */
 
 export type { ProfileSection, ProfileQuestionType, ProfileOption, ProfileQuestion } from "./types"
-import type { ProfileSection, ProfileOption, ProfileQuestion } from "./types"
+import type { ProfileOption, ProfileQuestion,ProfileSection } from "./types"
 
 export const TOGGLE_OPTIONS: ProfileOption[] = [
   { value: "true",  label: "Yes", emoji: "✅" },

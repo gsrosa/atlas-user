@@ -34,7 +34,7 @@
   "password.current": "Contraseña actual",
   "password.new": "Nueva contraseña",
   "password.confirm": "Confirmar nueva contraseña",
-  "password.hint": "Al menos 12 caracteres con mayúscula, minúscula y un número",
+  "password.hint": "Al menos 8 caracteres con mayúscula, minúscula y un número",
   "password.update": "Actualizar contraseña",
   "password.updating": "Actualizando…",
   "preferences.title": "Preferencias de viaje",

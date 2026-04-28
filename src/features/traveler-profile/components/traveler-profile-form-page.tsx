@@ -1,15 +1,15 @@
 import React from "react";
 
 import { Button, cn } from "@gsrosa/nexploring-ui";
-import { Controller } from "react-hook-form";
 import { ChevronRightIcon } from "lucide-react";
+import { Controller } from "react-hook-form";
 
+import { useTravelerProfileForm } from "@/features/traveler-profile/hooks/use-traveler-profile-form";
 import {
-  PROFILE_SECTIONS,
   PROFILE_QUESTIONS,
+  PROFILE_SECTIONS,
 } from "@/features/traveler-profile/shared/constants";
 import { canProceedSection } from "@/features/traveler-profile/shared/form-validation";
-import { useTravelerProfileForm } from "@/features/traveler-profile/hooks/use-traveler-profile-form";
 import type { TravelerProfileFormValues } from "@/features/traveler-profile/shared/schema";
 
 import { QuestionBlock } from "./question-block";

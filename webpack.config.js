@@ -1,4 +1,6 @@
+/* eslint-disable */
 const path = require('path');
+const webpack = require('webpack');
 const { ModuleFederationPlugin } = require('webpack').container;
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 
@@ -46,6 +48,9 @@ module.exports = (env, argv) => {
       ],
     },
     plugins: [
+      new webpack.DefinePlugin({
+        'process.env.NEXT_PUBLIC_API_URL': JSON.stringify(process.env.NEXT_PUBLIC_API_URL ?? 'http://localhost:4000'),
+      }),
       new ModuleFederationPlugin({
         name: 'userApp',
         filename: 'remoteEntry.js',
@@ -83,6 +88,21 @@ module.exports = (env, argv) => {
           'react-router-dom': {
             singleton: true,
             requiredVersion: '^7.0.0',
+            strictVersion: false,
+          },
+          '@tanstack/react-query': {
+            singleton: true,
+            requiredVersion: '^5.0.0',
+            strictVersion: false,
+          },
+          '@trpc/client': {
+            singleton: true,
+            requiredVersion: '^11.0.0',
+            strictVersion: false,
+          },
+          '@trpc/tanstack-react-query': {
+            singleton: true,
+            requiredVersion: '^11.0.0',
             strictVersion: false,
           },
         },

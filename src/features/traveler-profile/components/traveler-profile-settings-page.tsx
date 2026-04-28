@@ -1,10 +1,10 @@
-import { PencilIcon } from "lucide-react";
 import { Button, cn } from "@gsrosa/nexploring-ui";
-
-import { trpc } from "@/lib/trpc";
+import { PencilIcon } from "lucide-react";
 
 import { PROFILE_QUESTIONS } from "@/features/traveler-profile/shared/constants";
 import type { ProfileQuestion } from "@/features/traveler-profile/shared/types";
+
+import { trpc } from "@/trpc/client";
 
 type StepValueProps = {
   step: ProfileQuestion;
@@ -75,7 +75,9 @@ const MultiChips = ({ step, prefs }: StepValueProps) => {
             key={val}
             className="inline-flex max-w-full items-center gap-1 rounded-full bg-neutral-700 px-2 py-0.5 text-xs font-medium text-neutral-100"
           >
-            {opt?.emoji && <span className="shrink-0 leading-none">{opt.emoji}</span>}
+            {opt?.emoji && (
+              <span className="shrink-0 leading-none">{opt.emoji}</span>
+            )}
             <span className="min-w-0 truncate">{opt?.label ?? val}</span>
           </span>
         );
