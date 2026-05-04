@@ -4,13 +4,8 @@ import { cn } from '@gsrosa/nexploring-ui';
 import { CreditCardIcon, LockIcon, MenuIcon, SlidersHorizontalIcon, UserIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
-import { Toaster } from 'sonner';
 
 import { AccountShell } from '@/features/users/components/account-shell';
-
-import { TrpcProvider } from '@/providers/trpc-provider';
-
-import '@/lib/i18n';
 
 // ─── Sidebar items ────────────────────────────────────────────────────────────
 
@@ -121,11 +116,5 @@ function ProfileLayoutInner() {
   );
 }
 
-export default function ProfileLayout() {
-  return (
-    <TrpcProvider>
-      <ProfileLayoutInner />
-      <Toaster richColors position="top-center" theme="dark" />
-    </TrpcProvider>
-  );
-}
+export { ProfileLayoutInner as ProfileLayout };
+export default ProfileLayoutInner;

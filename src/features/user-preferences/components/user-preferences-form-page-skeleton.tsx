@@ -1,4 +1,4 @@
-export const TravelerProfileFormPageSkeleton = () => {
+export const UserPreferencesFormPageSkeleton = () => {
   return (
     <div className="flex min-h-dvh flex-col bg-neutral-900 text-neutral-100">
       <header className="sticky top-0 z-50 border-b border-neutral-800/20 bg-neutral-900/80 backdrop-blur-xl">

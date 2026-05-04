@@ -1,17 +1,17 @@
-import React from "react";
+import React from 'react';
 
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useQueryClient } from "@tanstack/react-query";
-import { getQueryKey } from "@trpc/react-query";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useQueryClient } from '@tanstack/react-query';
+import { getQueryKey } from '@trpc/react-query';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import {
   type ProfileFormValues,
   profileSchema,
-} from "@/features/users/shared/form-validation";
+} from '@/features/profile/shared/form-validation';
 
-import { trpc } from "@/trpc/client";
+import { trpc } from '@/trpc/client';
 
 export function useProfileForm() {
   const queryClient = useQueryClient();
@@ -22,32 +22,32 @@ export function useProfileForm() {
   const form = useForm<ProfileFormValues>({
     resolver: zodResolver(profileSchema),
     defaultValues: {
-      first_name: "",
-      last_name: "",
+      first_name: '',
+      last_name: '',
       gender: undefined,
-      phone: "",
-      bio: "",
-      country: "",
-      avatar_url: "",
+      phone: '',
+      bio: '',
+      country: '',
+      avatar_url: '',
     },
   });
 
   React.useEffect(() => {
     if (!profile) return;
     form.reset({
-      first_name: profile.first_name ?? "",
-      last_name: profile.last_name ?? "",
-      gender: (profile.gender as ProfileFormValues["gender"]) ?? undefined,
-      phone: profile.phone ?? "",
-      bio: profile.bio ?? "",
-      country: profile.country ?? "",
-      avatar_url: profile.avatar_url ?? "",
+      first_name: profile.first_name ?? '',
+      last_name: profile.last_name ?? '',
+      gender: (profile.gender as ProfileFormValues['gender']) ?? undefined,
+      phone: profile.phone ?? '',
+      bio: profile.bio ?? '',
+      country: profile.country ?? '',
+      avatar_url: profile.avatar_url ?? '',
     });
   }, [profile, form]);
 
   const updateMe = trpc.users.updateMe.useMutation({
     onSuccess: ({ profile: updated }) => {
-      toast.success("Profile updated successfully");
+      toast.success('Profile updated successfully');
       queryClient.setQueryData(
         getQueryKey(trpc.users.me),
         (prev: { profile: unknown } | undefined) =>

@@ -12,16 +12,21 @@ import { UserIcon } from 'lucide-react';
 import { Controller } from 'react-hook-form';
 import { useTranslation } from 'react-i18next';
 
+import { useProfileForm } from '@/features/profile/hooks/use-profile-form';
 import { AccountSectionHeader } from '@/features/users/components/account-section-header';
 import { FormField } from '@/features/users/components/form-field';
-import { useProfileForm } from '@/features/users/hooks/use-profile-form';
 
 function ProfilePage() {
   const { t } = useTranslation('profile');
-  const { form, profile, isLoadingProfile, isSubmitting, onSubmit } = useProfileForm();
-  const { register, control, formState: { errors } } = form;
+  const { form, profile, isLoadingProfile, isSubmitting, onSubmit } =
+    useProfileForm();
+  const {
+    register,
+    control,
+    formState: { errors },
+  } = form;
 
-  const GENDER_OPTIONS = [
+  const genderOptions = [
     { value: 'male', label: t('gender.male') },
     { value: 'female', label: t('gender.female') },
     { value: 'other', label: t('gender.other') },
@@ -49,10 +54,15 @@ function ProfilePage() {
       <div className="flex items-center gap-5">
         <div className="relative size-20 shrink-0 overflow-hidden rounded-full border border-neutral-700 bg-neutral-600">
           {avatarUrl ? (
-            <img src={avatarUrl} alt="" className="size-full object-cover" referrerPolicy="no-referrer" />
+            <img
+              src={avatarUrl}
+              alt=""
+              className="size-full object-cover"
+              referrerPolicy="no-referrer"
+            />
           ) : (
             <div className="flex size-full items-center justify-center text-xl font-semibold text-neutral-100">
-              {isLoadingProfile ? '…' : initials}
+              {isLoadingProfile ? '...' : initials}
             </div>
           )}
         </div>
@@ -64,9 +74,7 @@ function ProfilePage() {
               <p className="font-medium text-neutral-100">
                 {firstName} {lastName}
               </p>
-              <p className="text-sm text-neutral-400">
-                {profile?.email ?? ''}
-              </p>
+              <p className="text-sm text-neutral-400">{profile?.email ?? ''}</p>
             </>
           )}
         </div>
@@ -74,14 +82,22 @@ function ProfilePage() {
 
       <form onSubmit={onSubmit} className="space-y-6">
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <FormField label={t('about.firstName')} htmlFor="first-name" error={errors.first_name?.message}>
+          <FormField
+            label={t('about.firstName')}
+            htmlFor="first-name"
+            error={errors.first_name?.message}
+          >
             <Input
               id="first-name"
               disabled={isLoadingProfile}
               {...register('first_name')}
             />
           </FormField>
-          <FormField label={t('about.lastName')} htmlFor="last-name" error={errors.last_name?.message}>
+          <FormField
+            label={t('about.lastName')}
+            htmlFor="last-name"
+            error={errors.last_name?.message}
+          >
             <Input
               id="last-name"
               disabled={isLoadingProfile}
@@ -107,22 +123,26 @@ function ProfilePage() {
         >
           <Input
             id="avatar-url"
-            placeholder="https://…"
+            placeholder="https://..."
             disabled={isLoadingProfile}
             {...register('avatar_url')}
           />
         </FormField>
 
         <div className="grid grid-cols-1 gap-5 sm:grid-cols-2">
-          <FormField label={t('about.gender')} htmlFor="gender" error={errors.gender?.message}>
+          <FormField
+            label={t('about.gender')}
+            htmlFor="gender"
+            error={errors.gender?.message}
+          >
             <Controller
               control={control}
               name="gender"
               render={({ field }) => (
                 <Select
                   value={field.value ?? ''}
-                  onValueChange={(val) =>
-                    field.onChange(val === '' ? undefined : val)
+                  onValueChange={(value) =>
+                    field.onChange(value === '' ? undefined : value)
                   }
                   disabled={isLoadingProfile}
                 >
@@ -130,9 +150,9 @@ function ProfilePage() {
                     <SelectValue placeholder={t('about.genderPlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
-                    {GENDER_OPTIONS.map((o) => (
-                      <SelectItem key={o.value} value={o.value}>
-                        {o.label}
+                    {genderOptions.map((option) => (
+                      <SelectItem key={option.value} value={option.value}>
+                        {option.label}
                       </SelectItem>
                     ))}
                   </SelectContent>
@@ -141,7 +161,11 @@ function ProfilePage() {
             />
           </FormField>
 
-          <FormField label={t('about.phone')} htmlFor="phone" error={errors.phone?.message}>
+          <FormField
+            label={t('about.phone')}
+            htmlFor="phone"
+            error={errors.phone?.message}
+          >
             <Input
               id="phone"
               type="tel"
@@ -167,7 +191,11 @@ function ProfilePage() {
           />
         </FormField>
 
-        <FormField label={t('about.bio')} htmlFor="bio" error={errors.bio?.message}>
+        <FormField
+          label={t('about.bio')}
+          htmlFor="bio"
+          error={errors.bio?.message}
+        >
           <Textarea
             id="bio"
             rows={3}

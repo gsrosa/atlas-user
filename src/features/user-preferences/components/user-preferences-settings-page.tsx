@@ -1,8 +1,8 @@
 import { Button, cn } from "@gsrosa/nexploring-ui";
 import { PencilIcon } from "lucide-react";
 
-import { PROFILE_QUESTIONS } from "@/features/traveler-profile/shared/constants";
-import type { ProfileQuestion } from "@/features/traveler-profile/shared/types";
+import { PROFILE_QUESTIONS } from "@/features/user-preferences/shared/constants";
+import type { ProfileQuestion } from "@/features/user-preferences/shared/types";
 
 import { trpc } from "@/trpc/client";
 
@@ -116,7 +116,7 @@ const SECTIONS = buildSections();
 
 type Props = { onEdit?: () => void };
 
-export const TravelerProfileSettingsPage = ({ onEdit }: Props) => {
+export const UserPreferencesSettingsPage = ({ onEdit }: Props) => {
   const { data, isLoading } = trpc.travelerProfile.get.useQuery();
 
   if (isLoading) {

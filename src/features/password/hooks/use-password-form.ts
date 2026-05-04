@@ -1,27 +1,27 @@
-import { zodResolver } from "@hookform/resolvers/zod";
-import { useForm } from "react-hook-form";
-import { toast } from "sonner";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { useForm } from 'react-hook-form';
+import { toast } from 'sonner';
 
 import {
   changePasswordSchema,
   type ChangePasswordValues,
-} from "@/features/users/shared/form-validation";
+} from '@/features/password/shared/form-validation';
 
-import { trpc } from "@/trpc/client";
+import { trpc } from '@/trpc/client';
 
 export function usePasswordForm() {
   const form = useForm<ChangePasswordValues>({
     resolver: zodResolver(changePasswordSchema),
     defaultValues: {
-      currentPassword: "",
-      newPassword: "",
-      confirmPassword: "",
+      currentPassword: '',
+      newPassword: '',
+      confirmPassword: '',
     },
   });
 
   const changePassword = trpc.auth.changePassword.useMutation({
     onSuccess: () => {
-      toast.success("Password updated successfully");
+      toast.success('Password updated successfully');
       form.reset();
     },
     onError: (err) => toast.error(err.message),

@@ -55,12 +55,15 @@ module.exports = (env, argv) => {
         name: 'userApp',
         filename: 'remoteEntry.js',
         exposes: {
-          './App': './src/bootstrap.tsx',
+          './App': './src/bootstraps/bootstrap.tsx',
           './Skeleton': './src/skeleton.tsx',
-          './ProfileLayout': './src/features/users/profile-layout.tsx',
-          './ProfileAboutPage': './src/features/users/components/profile-page.tsx',
-          './ProfilePasswordPage': './src/features/users/components/password-page.tsx',
-          './ProfilePreferencesPage': './src/features/users/components/preferences-page.tsx',
+          './ProfileLayout': './src/bootstraps/profile-layout-bootstrap.tsx',
+          './ProfilePage': './src/bootstraps/profile-bootstrap.tsx',
+          './PasswordPage': './src/bootstraps/password-bootstrap.tsx',
+          './UserPreferencesPage': './src/bootstraps/user-preferences-bootstrap.tsx',
+          './ProfileAboutPage': './src/bootstraps/profile-bootstrap.tsx',
+          './ProfilePasswordPage': './src/bootstraps/password-bootstrap.tsx',
+          './ProfilePreferencesPage': './src/bootstraps/user-preferences-bootstrap.tsx',
         },
         shared: {
           react: {

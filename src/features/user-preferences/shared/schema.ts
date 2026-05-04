@@ -1,6 +1,6 @@
 import { z } from "zod"
 
-export const travelerProfileFormSchema = z.object({
+export const userPreferencesFormSchema = z.object({
   diet: z.string().optional(),
   foodAdventurousness: z.number().min(1).max(5).optional(),
   foodImportance: z.number().min(1).max(5).optional(),
@@ -15,4 +15,4 @@ export const travelerProfileFormSchema = z.object({
   tripMemorableBy: z.string().optional(),
 })
 
-export type TravelerProfileFormValues = z.infer<typeof travelerProfileFormSchema>
+export type UserPreferencesFormValues = z.infer<typeof userPreferencesFormSchema>

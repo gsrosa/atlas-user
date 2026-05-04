@@ -2,7 +2,7 @@ const NAV_ITEMS = ['Profile', 'Password', 'Payments', 'Preferences']
 
 const SECTION_ROWS = [4, 3, 4]
 
-export const TravelerProfileSettingsPageSkeleton = () => {
+export const UserPreferencesSettingsPageSkeleton = () => {
   return (
     <div className="account-user-root relative flex min-h-[calc(100dvh-60px)] w-full min-w-0 flex-col overflow-hidden bg-surface text-neutral-100 md:min-h-screen">
       <div className="relative z-1 flex min-h-[calc(100dvh-60px)] w-full min-w-0 flex-1 flex-col md:min-h-screen">

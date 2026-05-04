@@ -4,16 +4,16 @@ import { beforeEach, describe, expect, it, vi } from "vitest";
 import UserAppSkeleton from "@/skeleton";
 
 vi.mock(
-  "@/features/traveler-profile/components/traveler-profile-form-page-skeleton",
+  "@/features/user-preferences/components/user-preferences-form-page-skeleton",
   () => ({
-    TravelerProfileFormPageSkeleton: () => <div>Onboarding skeleton</div>,
+    UserPreferencesFormPageSkeleton: () => <div>Onboarding skeleton</div>,
   }),
 );
 
 vi.mock(
-  "@/features/traveler-profile/components/traveler-profile-settings-page-skeleton",
+  "@/features/user-preferences/components/user-preferences-settings-page-skeleton",
   () => ({
-    TravelerProfileSettingsPageSkeleton: () => (
+    UserPreferencesSettingsPageSkeleton: () => (
       <div>Profile settings skeleton</div>
     ),
   }),

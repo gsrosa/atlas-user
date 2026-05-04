@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Toaster } from 'sonner';
 
-import { TravelerProfileFormPage } from '@/features/traveler-profile';
+import { UserPreferencesFormPage } from '@/features/user-preferences';
 import { AccountLayout } from '@/features/users';
 
 import { TrpcProvider } from '@/providers/trpc-provider';
@@ -11,12 +11,12 @@ import { TrpcProvider } from '@/providers/trpc-provider';
 
 type View =
   | { type: 'account' }
-  | { type: 'traveler-profile-form' }
+  | { type: 'user-preferences-form' }
   | { type: 'traveler-settings' };
 
 const resolveView = (): View => {
   const path = window.location.pathname;
-  if (/^\/profile\/onboarding\/?$/.test(path)) return { type: 'traveler-profile-form' };
+  if (/^\/profile\/onboarding\/?$/.test(path)) return { type: 'user-preferences-form' };
   if (path === '/profile' || /^\/profile\/settings\/?$/.test(path)) return { type: 'traveler-settings' };
   return { type: 'account' };
 };
@@ -52,7 +52,7 @@ export const App = () => {
     <TrpcProvider>
       <div className="flex min-h-full w-full min-w-0 flex-col bg-transparent font-sans">
         <div className="flex min-h-0 flex-1 flex-col">
-          {view.type === 'traveler-profile-form' && <TravelerProfileFormPage />}
+          {view.type === 'user-preferences-form' && <UserPreferencesFormPage />}
           {view.type === 'traveler-settings' && <AccountLayout initialSection="preferences" />}
           {view.type === 'account' && <AccountLayout />}
         </div>

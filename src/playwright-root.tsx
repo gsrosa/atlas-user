@@ -2,11 +2,10 @@ import React from 'react';
 
 import { BrowserRouter, Navigate, Route, Routes } from 'react-router-dom';
 
-import { TravelerProfileFormPage } from '@/features/traveler-profile';
+import { PasswordPage } from '@/features/password';
+import { ProfilePage } from '@/features/profile';
+import { UserPreferencesFormPage, UserPreferencesPage } from '@/features/user-preferences';
 import { AccountLayout } from '@/features/users';
-import { PasswordPage } from '@/features/users/components/password-page';
-import PreferencesPage from '@/features/users/components/preferences-page';
-import { ProfilePage } from '@/features/users/components/profile-page';
 import ProfileLayout from '@/features/users/profile-layout';
 
 import { TrpcProvider } from '@/providers/trpc-provider';
@@ -25,7 +24,7 @@ export const PlaywrightRoot = () => {
               path="onboarding"
               element={
                 <TrpcProvider>
-                  <TravelerProfileFormPage />
+                  <UserPreferencesFormPage />
                 </TrpcProvider>
               }
             />
@@ -50,7 +49,7 @@ export const PlaywrightRoot = () => {
               <Route index element={<Navigate to="about" replace />} />
               <Route path="about" element={<ProfilePage />} />
               <Route path="password" element={<PasswordPage />} />
-              <Route path="preferences" element={<PreferencesPage />} />
+              <Route path="preferences" element={<UserPreferencesPage />} />
             </Route>
           </Route>
         </Routes>

@@ -4,13 +4,13 @@ import { Button, cn } from "@gsrosa/nexploring-ui";
 import { ChevronRightIcon } from "lucide-react";
 import { Controller } from "react-hook-form";
 
-import { useTravelerProfileForm } from "@/features/traveler-profile/hooks/use-traveler-profile-form";
+import { useUserPreferencesForm } from "@/features/user-preferences/hooks/use-user-preferences-form";
 import {
   PROFILE_QUESTIONS,
   PROFILE_SECTIONS,
-} from "@/features/traveler-profile/shared/constants";
-import { canProceedSection } from "@/features/traveler-profile/shared/form-validation";
-import type { TravelerProfileFormValues } from "@/features/traveler-profile/shared/schema";
+} from "@/features/user-preferences/shared/constants";
+import { canProceedSection } from "@/features/user-preferences/shared/form-validation";
+import type { UserPreferencesFormValues } from "@/features/user-preferences/shared/schema";
 
 import { QuestionBlock } from "./question-block";
 
@@ -19,9 +19,9 @@ const GROUPED = PROFILE_SECTIONS.map((sec) => ({
   steps: PROFILE_QUESTIONS.filter((s) => s.sectionIndex === sec.index),
 }));
 
-export const TravelerProfileFormPage = () => {
+export const UserPreferencesFormPage = () => {
   const { form, isLoading, isEditing, isPending, isSuccess, handleFormSubmit } =
-    useTravelerProfileForm();
+    useUserPreferencesForm();
   const { control, watch } = form;
 
   const [sectionIdx, setSectionIdx] = React.useState(0);
@@ -121,7 +121,7 @@ export const TravelerProfileFormPage = () => {
               <Controller
                 key={step.field}
                 control={control}
-                name={step.field as keyof TravelerProfileFormValues}
+                name={step.field as keyof UserPreferencesFormValues}
                 render={({ field }) => (
                   <QuestionBlock
                     step={step}

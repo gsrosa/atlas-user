@@ -1,5 +1,5 @@
-import { TOGGLE_OPTIONS } from "@/features/traveler-profile/shared/constants"
-import type { ProfileQuestion } from "@/features/traveler-profile/shared/types"
+import { TOGGLE_OPTIONS } from "@/features/user-preferences/shared/constants"
+import type { ProfileQuestion } from "@/features/user-preferences/shared/types"
 
 import { ChipSelect } from "./chip-select"
 import { ScaleInput } from "./scale-input"

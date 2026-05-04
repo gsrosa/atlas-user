@@ -2,14 +2,17 @@ import { Button, Input } from '@gsrosa/nexploring-ui';
 import { LockIcon } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 
+import { usePasswordForm } from '@/features/password/hooks/use-password-form';
 import { AccountSectionHeader } from '@/features/users/components/account-section-header';
 import { FormField } from '@/features/users/components/form-field';
-import { usePasswordForm } from '@/features/users/hooks/use-password-form';
 
 function PasswordPage() {
   const { t } = useTranslation('profile');
   const { form, isSubmitting, onSubmit } = usePasswordForm();
-  const { register, formState: { errors } } = form;
+  const {
+    register,
+    formState: { errors },
+  } = form;
 
   return (
     <div className="animate-account-fade-in-up space-y-10">

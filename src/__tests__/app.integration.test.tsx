@@ -8,8 +8,8 @@ vi.mock('@/providers/trpc-provider', () => ({
   TrpcProvider: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 
-vi.mock('@/features/traveler-profile', () => ({
-  TravelerProfileFormPage: () => <div>Traveler profile form</div>,
+vi.mock('@/features/user-preferences', () => ({
+  UserPreferencesFormPage: () => <div>User preferences form</div>,
 }));
 
 vi.mock('@/features/users', () => ({
@@ -39,7 +39,7 @@ describe('App (integration)', () => {
   it('should show the traveler onboarding form when the path is /profile/onboarding', () => {
     setPath('/profile/onboarding');
     render(<App />);
-    expect(screen.getByText('Traveler profile form')).toBeInTheDocument();
+    expect(screen.getByText('User preferences form')).toBeInTheDocument();
   });
 
   it('should show account preferences when the path is /profile/settings', () => {
@@ -68,7 +68,7 @@ describe('App (integration)', () => {
     window.history.pushState({}, '', '/profile/onboarding');
 
     await waitFor(() => {
-      expect(screen.getByText('Traveler profile form')).toBeInTheDocument();
+      expect(screen.getByText('User preferences form')).toBeInTheDocument();
     });
   });
 });

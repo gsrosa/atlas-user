@@ -2,13 +2,13 @@ import React from 'react';
 
 import { cn } from '@gsrosa/nexploring-ui';
 
+import { PasswordPage } from '@/features/password';
+import { ProfilePage } from '@/features/profile';
+import { UserPreferencesPage } from '@/features/user-preferences';
 import { ACCOUNT_SECTION_LABELS, type AccountSectionId } from '@/features/users/account-section';
 import { AccountShell } from '@/features/users/components/account-shell';
 import { AccountMobileBar, AccountSidebar } from '@/features/users/components/account-sidebar';
-import { PasswordPage } from '@/features/users/components/password-page';
 import { PaymentsPage } from '@/features/users/components/payments-page';
-import { PreferencesPage } from '@/features/users/components/preferences-page';
-import { ProfilePage } from '@/features/users/components/profile-page';
 
 function AccountSectionContent({ section }: { section: AccountSectionId }) {
   switch (section) {
@@ -19,7 +19,7 @@ function AccountSectionContent({ section }: { section: AccountSectionId }) {
     case 'payments':
       return <PaymentsPage />;
     case 'preferences':
-      return <PreferencesPage />;
+      return <UserPreferencesPage />;
     default:
       return null;
   }

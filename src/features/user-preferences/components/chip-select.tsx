@@ -1,7 +1,7 @@
 import { cn } from "@gsrosa/nexploring-ui"
 import { CheckIcon } from "lucide-react"
 
-import type { ProfileOption } from "@/features/traveler-profile/shared/types"
+import type { ProfileOption } from "@/features/user-preferences/shared/types"
 
 type ChipSelectProps = {
   options: ProfileOption[]

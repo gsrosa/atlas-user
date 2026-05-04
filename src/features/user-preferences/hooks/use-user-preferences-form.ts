@@ -7,33 +7,33 @@ import { useForm } from "react-hook-form";
 import { toast } from "sonner";
 
 import {
-  travelerProfileFormSchema,
-  type TravelerProfileFormValues,
-} from "@/features/traveler-profile/shared/schema";
+  userPreferencesFormSchema,
+  type UserPreferencesFormValues,
+} from "@/features/user-preferences/shared/schema";
 import {
   clearDraft,
   loadDraft,
   saveDraft,
-} from "@/features/traveler-profile/utils/draft-storage";
+} from "@/features/user-preferences/utils/draft-storage";
 
 import { trpc } from "@/trpc/client";
 import { type RouterInputs } from "@/trpc/types";
 
 type PatchInput = RouterInputs["travelerProfile"]["patch"];
 
-export const useTravelerProfileForm = () => {
+export const useUserPreferencesForm = () => {
   const queryClient = useQueryClient();
 
   const { data, isLoading } = trpc.travelerProfile.get.useQuery();
-  const traverProfileQueryKey = getQueryKey(
+  const travelerProfileQueryKey = getQueryKey(
     trpc.travelerProfile.get,
     undefined,
     "query",
   );
 
-  const form = useForm<TravelerProfileFormValues>({
-    resolver: zodResolver(travelerProfileFormSchema),
-    defaultValues: loadDraft() as TravelerProfileFormValues,
+  const form = useForm<UserPreferencesFormValues>({
+    resolver: zodResolver(userPreferencesFormSchema),
+    defaultValues: loadDraft() as UserPreferencesFormValues,
   });
 
   const patch = trpc.travelerProfile.patch.useMutation({
@@ -42,7 +42,7 @@ export const useTravelerProfileForm = () => {
       window.dispatchEvent(
         new CustomEvent("nexploring:traveler-profile-updated"),
       );
-      queryClient.invalidateQueries({ queryKey: traverProfileQueryKey });
+      queryClient.invalidateQueries({ queryKey: travelerProfileQueryKey });
     },
     onError: (err: unknown) => {
       toast.error(
@@ -55,10 +55,10 @@ export const useTravelerProfileForm = () => {
     if (!data?.preferences) return;
     const stored = loadDraft();
     form.reset({
-      ...(data.preferences as TravelerProfileFormValues),
-      ...(stored as TravelerProfileFormValues),
+      ...(data.preferences as UserPreferencesFormValues),
+      ...(stored as UserPreferencesFormValues),
     });
-  }, [data?.preferences]);
+  }, [data?.preferences, form]);
 
   React.useEffect(() => {
     // eslint-disable-next-line
@@ -66,7 +66,7 @@ export const useTravelerProfileForm = () => {
       saveDraft(values as Record<string, unknown>);
     });
     return unsubscribe;
-  }, []);
+  }, [form]);
 
   const handleFormSubmit = form.handleSubmit((values) => {
     patch.mutate(values as PatchInput);
